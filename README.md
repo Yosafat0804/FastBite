@@ -7,7 +7,8 @@ Website **FastBite** adalah aplikasi web layanan antar makanan modern yang diran
 ## Screenshot Website
 
 Berikut adalah tampilan utama website FastBite :
-![Website](image.png)
+<img width="1899" height="963" alt="image" src="https://github.com/user-attachments/assets/75c92012-6381-4626-9cdf-5a14868fdb33" />
+
 ---
 
 ## Fitur-Fitur
