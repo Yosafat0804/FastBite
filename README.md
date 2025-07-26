@@ -77,7 +77,7 @@ Berikut adalah tampilan utama website FastBite :
 
 ## Kontributor
 
-- Nama : Yosafat Bagas Herlianka
+- Nama : Yosafat Bagas Herlianka / 233402003
 - UAS Proyek PPPL Semester 4
 
 ---
