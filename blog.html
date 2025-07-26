@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog & Berita - FastBite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body { margin:0; font-family: 'Montserrat', sans-serif; background:#f8f8f8; color:#222;}
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 1rem 2.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .nav-logo {
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: #ffb347;
+            letter-spacing: 0.5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 2.5rem;
+        }
+        .nav-menu a {
+            color: #222;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            transition: color 0.2s;
+        }
+        .nav-menu a.active, .nav-menu a:hover {
+            color: #ffb347;
+        }
+        @media (max-width: 900px) {
+            .main-nav { flex-direction: column; align-items: flex-start; padding: 1rem 0.5rem;}
+            .nav-logo { margin-left: 1rem; margin-bottom: 0.5rem;}
+            .nav-menu { margin-right: 1rem; gap: 1rem; flex-wrap: wrap;}
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem;}
+        h1 { text-align: center; margin-bottom: 2rem;}
+        /* Filter & Search */
+        .blog-bar {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .blog-category {
+            background: #fff;
+            border: 2px solid #ffb347;
+            color: #ffb347;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s, color 0.2s;
+        }
+        .blog-category.active, .blog-category:hover {
+            background: #ffb347;
+            color: #fff;
+        }
+        .blog-search {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+            min-width: 200px;
+        }
+        /* Blog List */
+        .blog-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .blog-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 1.5rem 2rem;
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            position: relative;
+        }
+        .blog-thumb {
+            width: 120px;
+            height: 90px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+        .blog-content {
+            flex: 1;
+        }
+        .blog-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+        .blog-meta {
+            color: #ffb347;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        .blog-desc {
+            color: #666;
+            font-size: 0.98rem;
+            margin-bottom: 0.7rem;
+        }
+        .blog-readtime {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+        .blog-share {
+            position: absolute;
+            right: 18px;
+            bottom: 18px;
+            display: flex;
+            gap: 0.5rem;
+        }
+        .blog-share button {
+            background: #ffb347;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .blog-share button:hover { background: #ff8800; }
+        /* Pagination */
+        .pagination {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 2rem 0 0 0;
+        }
+        .pagination-btn {
+            background: #fff;
+            border: 2px solid #ffb347;
+            color: #ffb347;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s, color 0.2s;
+        }
+        .pagination-btn.active, .pagination-btn:hover {
+            background: #ffb347;
+            color: #fff;
+        }
+        @media (max-width: 700px) {
+            .blog-card { flex-direction: column; align-items: stretch;}
+            .blog-thumb { width: 100%; height: 150px;}
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="main-nav">
+        <div class="nav-logo">FastBite</div>
+        <div class="nav-menu">
+            <a href="index.html">Beranda</a>
+            <a href="services.html">Layanan</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">Tentang Kami</a>
+            <a href="contact.html">Kontak</a>
+            <a href="blog.html" class="active">Blog</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Blog & Berita</h1>
+        <!-- Filter & Search -->
+        <div class="blog-bar">
+            <button class="blog-category active" data-cat="all">Semua</button>
+            <button class="blog-category" data-cat="tips">Tips</button>
+            <button class="blog-category" data-cat="promo">Promo</button>
+            <button class="blog-category" data-cat="berita">Berita</button>
+            <input type="text" class="blog-search" id="blog-search" placeholder="Cari artikel...">
+        </div>
+        <!-- Blog List -->
+        <div class="blog-list" id="blog-list">
+            <!-- Diisi dinamis -->
+        </div>
+        <!-- Pagination -->
+        <div class="pagination" id="pagination"></div>
+    </div>
+    <script>
+        // Data artikel blog
+        const blogData = [
+            {
+                title: "5 Tips Memesan Makanan Online yang Aman",
+                cat: "tips",
+                date: "2025-07-01",
+                thumb: "https://image.idntimes.com/post/20240124/photo-1695654393816-2c6bfe301c32-8f4726724a317a02dc11c1cc59fa734c-209fe4e54657b37c12fc3e18d7898b13.jpeg?tr=w-1200,f-webp,q-75&width=1200&format=webp&quality=75",
+                desc: "Agar pesanan Anda selalu aman dan nyaman, simak tips berikut sebelum checkout.",
+                content: "Pesan makanan online kini semakin mudah. Namun, keamanan tetap harus diutamakan. Berikut 5 tips: 1) Pilih restoran terpercaya. 2) Cek ulasan pelanggan. 3) Gunakan metode pembayaran aman. 4) Jangan bagikan data pribadi. 5) Pastikan alamat pengantaran benar."
+            },
+            {
+                title: "Promo Spesial Akhir Pekan: Diskon 30%",
+                cat: "promo",
+                date: "2025-07-05",
+                thumb: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
+                desc: "Nikmati diskon spesial untuk semua pesanan di akhir pekan ini. Cek syarat dan ketentuannya!",
+                content: "Promo berlaku untuk semua pengguna baru dan lama. Gunakan kode WEEKEND30 saat checkout. Promo hanya berlaku Jumat-Minggu."
+            },
+            {
+                title: "Food Delivery Service Buka Cabang Baru di Bandung",
+                cat: "berita",
+                date: "2025-06-20",
+                thumb: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80",
+                desc: "Kini layanan kami hadir di Bandung! Pesan makanan favorit Anda dengan lebih cepat.",
+                content: "Dengan dibukanya cabang baru di Bandung, kami siap melayani lebih banyak pelanggan di Jawa Barat. Nikmati promo khusus pembukaan cabang!"
+            },
+            {
+                title: "Cara Menggunakan Kode Promo di Aplikasi",
+                cat: "tips",
+                date: "2025-06-15",
+                thumb: "https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80",
+                desc: "Panduan mudah menggunakan kode promo agar hemat saat pesan makanan.",
+                content: "Masukkan kode promo pada halaman checkout sebelum melakukan pembayaran. Pastikan kode masih berlaku dan sesuai syarat promo."
+            },
+            {
+                title: "Update Fitur: Live Chat Customer Service",
+                cat: "berita",
+                date: "2025-06-10",
+                thumb: "https://images.unsplash.com/photo-1506089676908-3592f7389d4d?auto=format&fit=crop&w=400&q=80",
+                desc: "Kini Anda bisa konsultasi langsung dengan CS kami lewat fitur live chat.",
+                content: "Fitur live chat tersedia 24 jam untuk membantu Anda menyelesaikan kendala atau pertanyaan seputar layanan kami."
+            }
+        ];
+
+        // --- Blog CMS Logic ---
+        const perPage = 3;
+        let currentPage = 1;
+        let currentCat = "all";
+        let currentSearch = "";
+
+        function calcReadTime(text) {
+            // 200 kata/menit
+            const words = text.split(/\s+/).length;
+            return Math.max(1, Math.round(words / 200));
+        }
+
+        function renderBlog() {
+            const list = document.getElementById('blog-list');
+            let filtered = blogData.filter(b =>
+                (currentCat === "all" || b.cat === currentCat) &&
+                (b.title.toLowerCase().includes(currentSearch) || b.desc.toLowerCase().includes(currentSearch) || b.content.toLowerCase().includes(currentSearch))
+            );
+            const total = filtered.length;
+            const totalPages = Math.ceil(total / perPage);
+            if (currentPage > totalPages) currentPage = 1;
+            const start = (currentPage - 1) * perPage;
+            const end = start + perPage;
+            list.innerHTML = '';
+            filtered.slice(start, end).forEach(b => {
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                card.innerHTML = `
+                    <img src="${b.thumb}" class="blog-thumb" alt="${b.title}">
+                    <div class="blog-content">
+                        <div class="blog-title">${b.title}</div>
+                        <div class="blog-meta">${capitalize(b.cat)} &bull; ${formatDate(b.date)}</div>
+                        <div class="blog-readtime"><i class="fa fa-clock"></i> ${calcReadTime(b.content)} menit baca</div>
+                        <div class="blog-desc">${b.desc}</div>
+                    </div>
+                    <div class="blog-share">
+                        <button title="Bagikan ke WhatsApp" onclick="shareTo('wa','${b.title}')"><i class="fab fa-whatsapp"></i></button>
+                        <button title="Bagikan ke Facebook" onclick="shareTo('fb','${b.title}')"><i class="fab fa-facebook-f"></i></button>
+                        <button title="Bagikan ke Twitter" onclick="shareTo('tw','${b.title}')"><i class="fab fa-twitter"></i></button>
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+            renderPagination(totalPages);
+        }
+
+        function renderPagination(totalPages) {
+            const pag = document.getElementById('pagination');
+            pag.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.className = 'pagination-btn' + (i === currentPage ? ' active' : '');
+                btn.textContent = i;
+                btn.onclick = () => {
+                    currentPage = i;
+                    renderBlog();
+                };
+                pag.appendChild(btn);
+            }
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+        function formatDate(dateStr) {
+            const d = new Date(dateStr);
+            return d.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        // --- Category & Search ---
+        document.querySelectorAll('.blog-category').forEach(btn => {
+            btn.onclick = function() {
+                document.querySelectorAll('.blog-category').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentCat = btn.dataset.cat;
+                currentPage = 1;
+                renderBlog();
+            };
+        });
+        document.getElementById('blog-search').oninput = function() {
+            currentSearch = this.value.toLowerCase();
+            currentPage = 1;
+            renderBlog();
+        };
+
+        // --- Simulasi Share ---
+        window.shareTo = function(type, title) {
+            let url = encodeURIComponent(window.location.href);
+            let text = encodeURIComponent(title + " - Food Delivery Service");
+            let shareUrl = "#";
+            if (type === "wa") shareUrl = `https://wa.me/?text=${text}%20${url}`;
+            if (type === "fb") shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`;
+            if (type === "tw") shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
+            window.open(shareUrl, "_blank");
+        };
+
+        // --- Init ---
+        document.addEventListener('DOMContentLoaded', renderBlog);
+    </script>
+</body>
+</html>

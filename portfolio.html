@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio - FastBite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body { margin:0; font-family: 'Montserrat', sans-serif; background:#f8f8f8; color:#222;}
+        .main-nav {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100vw;
+            position: relative;
+            z-index: 10;
+        }
+        .nav-logo {
+            font-weight: bold;
+            font-size: 1.7rem;
+            color: #ffb347;
+            margin-left: 2.5rem;
+            letter-spacing: 0.5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            margin-right: 2.5rem;
+        }
+        .nav-menu a {
+            color: #222;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+        }
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: #ffb347;
+        }
+        @media (max-width: 900px) {
+            .main-nav { flex-direction: column; align-items: flex-start; padding: 1rem 0.5rem;}
+            .nav-logo { margin-left: 1rem; margin-bottom: 0.5rem;}
+            .nav-menu { margin-right: 1rem; gap: 1rem; flex-wrap: wrap;}
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem;}
+        h1 { text-align: center; margin-bottom: 2rem;}
+        /* Filter */
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: #fff;
+            border: 2px solid #ffb347;
+            color: #ffb347;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s, color 0.2s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #ffb347;
+            color: #fff;
+        }
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .portfolio-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            width: 300px;
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+        }
+        .portfolio-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+        .portfolio-content {
+            padding: 1rem 1.2rem 1.2rem 1.2rem;
+        }
+        .portfolio-title { font-weight: bold; margin: 0.7rem 0 0.3rem 0;}
+        .portfolio-type { color: #ffb347; font-size: 0.95rem; margin-bottom: 0.5rem;}
+        .portfolio-desc { color: #666; font-size: 0.98rem;}
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            align-items: center;
+            justify-content: center;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox-img {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.2);
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            z-index: 1010;
+        }
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1100;
+            left: 0; top: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.active { display: flex; }
+        .modal-content {
+            background: #fff;
+            border-radius: 16px;
+            max-width: 500px;
+            width: 95vw;
+            padding: 2rem 2rem 1.5rem 2rem;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        }
+        .modal-close {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            font-size: 1.5rem;
+            color: #ffb347;
+            cursor: pointer;
+        }
+        .modal-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 0.5rem;}
+        .modal-type { color: #ffb347; font-size: 1rem; margin-bottom: 0.7rem;}
+        .modal-desc { color: #444; margin-bottom: 1.2rem;}
+        .modal-gallery {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .modal-gallery img {
+            width: 60px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            border: 2px solid #eee;
+            transition: border 0.2s;
+        }
+        .modal-gallery img:hover { border: 2px solid #ffb347; }
+        .modal-testimonial {
+            background: #fffbe7;
+            border-radius: 10px;
+            padding: 1rem;
+            color: #444;
+            font-size: 1rem;
+            margin-top: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+        .modal-testimonial strong { color: #ffb347; }
+        @media (max-width: 900px) {
+            .portfolio-grid { flex-direction: column; align-items: center;}
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">FastBite</div>
+        <div class="nav-menu">
+            <a href="index.html">Beranda</a>
+            <a href="services.html">Layanan</a>
+            <a href="portfolio.html" class="active">Portfolio</a>
+            <a href="about.html">Tentang Kami</a>
+            <a href="contact.html">Kontak</a>
+            <a href="blog.html">Blog</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Portfolio & Studi Kasus</h1>
+        <!-- Filter Bar -->
+        <div class="filter-bar" id="filter-bar">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="restoran">Restoran</button>
+            <button class="filter-btn" data-filter="event">Event</button>
+            <button class="filter-btn" data-filter="corporate">Corporate</button>
+        </div>
+        <!-- Portfolio Grid -->
+        <div class="portfolio-grid" id="portfolio-grid">
+            <!-- Diisi dinamis -->
+        </div>
+    </div>
+    <!-- Lightbox Gallery -->
+    <div class="lightbox" id="lightbox">
+        <span class="lightbox-close" id="lightbox-close">&times;</span>
+        <img src="" alt="Project Image" class="lightbox-img" id="lightbox-img">
+    </div>
+    <!-- Project Detail Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="modal-close">&times;</span>
+            <div class="modal-title" id="modal-title"></div>
+            <div class="modal-type" id="modal-type"></div>
+            <div class="modal-desc" id="modal-desc"></div>
+            <div class="modal-gallery" id="modal-gallery"></div>
+            <div class="modal-testimonial" id="modal-testimonial"></div>
+        </div>
+    </div>
+    <script>
+        // Data proyek portfolio
+        const projects = [
+            {
+                title: "Kerjasama Restoran Padang Sederhana",
+                type: "restoran",
+                desc: "Integrasi sistem pemesanan online dan pengantaran untuk jaringan restoran Padang Sederhana di 5 kota besar.",
+                images: [
+                    "https://www.franchiseindonesia.co.id/wp-content/uploads/2024/11/Frenchise-Indonesia-17.jpeg",
+                    "https://www.franchiseindonesia.co.id/wp-content/uploads/2024/11/Frenchise-Indonesia-17.jpeg"
+                ],
+                testimonial: {
+                    text: "Sejak bermitra dengan Food Delivery Service, omzet meningkat 30% dan pelanggan makin puas.",
+                    client: "Yuni, Manager Restoran Sederhana"
+                }
+            },
+            {
+                title: "Event Catering Jakarta Marathon",
+                type: "event",
+                desc: "Layanan pengantaran makanan massal untuk peserta dan panitia Jakarta Marathon 2024.",
+                images: [
+                    "https://rmol.id/images/berita/normal/2025/06/10942_09241629062025_jakim_2025.jpg",
+                    "https://rmol.id/images/berita/normal/2025/06/10942_09241629062025_jakim_2025.jpg"
+                ],
+                testimonial: {
+                    text: "Distribusi makanan sangat lancar dan tepat waktu. Terima kasih atas profesionalismenya!",
+                    client: "Rico, EO Jakarta Marathon"
+                }
+            },
+            {
+                title: "Corporate Lunch PT Maju Jaya",
+                type: "corporate",
+                desc: "Solusi makan siang rutin untuk karyawan PT Maju Jaya dengan menu variatif dan pengantaran terjadwal.",
+                images: [
+                    "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80",
+                    "https://images.unsplash.com/photo-1506089676908-3592f7389d4d?auto=format&fit=crop&w=400&q=80"
+                ],
+                testimonial: {
+                    text: "Karyawan sangat terbantu, makanan selalu fresh dan pengantaran tepat waktu.",
+                    client: "Dewi, HRD PT Maju Jaya"
+                }
+            },
+            {
+                title: "Paket Promo Ramadan Restoran Nusantara",
+                type: "restoran",
+                desc: "Paket promo khusus Ramadan dengan pengantaran cepat dan diskon spesial.",
+                images: [
+                    "https://ascenthospitalitygroup.com/img/article/art_956f65641c9db3b32a19d3d56346c253-20250303180822.jpg",
+                    "https://ascenthospitalitygroup.com/img/article/art_956f65641c9db3b32a19d3d56346c253-20250303180822.jpg"
+                ],
+                testimonial: {
+                    text: "Promo berjalan sukses, pesanan meningkat dua kali lipat selama Ramadan.",
+                    client: "Ari, Owner Restoran Nusantara"
+                }
+            }
+        ];
+
+        // Render portfolio grid
+        function renderPortfolio(filter = "all") {
+            const grid = document.getElementById('portfolio-grid');
+            grid.innerHTML = '';
+            projects.filter(p => filter === "all" || p.type === filter)
+                .forEach((p, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'portfolio-card';
+                    card.innerHTML = `
+                        <img src="${p.images[0]}" class="portfolio-img" alt="${p.title}">
+                        <div class="portfolio-content">
+                            <div class="portfolio-title">${p.title}</div>
+                            <div class="portfolio-type">${capitalize(p.type)}</div>
+                            <div class="portfolio-desc">${p.desc.substring(0, 60)}...</div>
+                        </div>
+                    `;
+                    // Lightbox on image click
+                    card.querySelector('.portfolio-img').onclick = (e) => {
+                        e.stopPropagation();
+                        openLightbox(p.images[0]);
+                    };
+                    // Modal on card click
+                    card.onclick = () => openModal(idx);
+                    grid.appendChild(card);
+                });
+        }
+        // Capitalize helper
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+        // Filter event
+        document.addEventListener('DOMContentLoaded', function() {
+            renderPortfolio();
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.onclick = function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderPortfolio(btn.dataset.filter);
+                };
+            });
+        });
+
+        // Lightbox
+        function openLightbox(imgUrl) {
+            document.getElementById('lightbox-img').src = imgUrl;
+            document.getElementById('lightbox').classList.add('active');
+        }
+        document.getElementById('lightbox-close').onclick = function() {
+            document.getElementById('lightbox').classList.remove('active');
+        };
+        document.getElementById('lightbox').onclick = function(e) {
+            if (e.target === this) this.classList.remove('active');
+        };
+
+        // Modal
+        function openModal(idx) {
+            const p = projects[idx];
+            document.getElementById('modal-title').textContent = p.title;
+            document.getElementById('modal-type').textContent = capitalize(p.type);
+            document.getElementById('modal-desc').textContent = p.desc;
+            // Gallery
+            const gal = document.getElementById('modal-gallery');
+            gal.innerHTML = '';
+            p.images.forEach(img => {
+                const im = document.createElement('img');
+                im.src = img;
+                im.alt = p.title;
+                im.onclick = () => openLightbox(img);
+                gal.appendChild(im);
+            });
+            // Testimonial
+            document.getElementById('modal-testimonial').innerHTML = `
+                <i class="fa fa-quote-left"></i> ${p.testimonial.text}
+                <br><strong>- ${p.testimonial.client}</strong>
+            `;
+            document.getElementById('modal').classList.add('active');
+        }
+        document.getElementById('modal-close').onclick = function() {
+            document.getElementById('modal').classList.remove('active');
+        };
+        document.getElementById('modal').onclick = function(e) {
+            if (e.target === this) this.classList.remove('active');
+        };
+    </script>
+</body>
+</html>

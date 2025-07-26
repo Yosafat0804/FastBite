@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Layanan & Produk - FastBite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body { margin:0; font-family: 'Montserrat', sans-serif; background:#f8f8f8; color:#222;}
+        .main-nav {
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 1rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100vw;
+            position: relative;
+            z-index: 10;
+        }
+        .nav-logo {
+            font-weight: bold;
+            font-size: 1.7rem;
+            color: #ffb347;
+            margin-left: 2.5rem;
+            letter-spacing: 0.5px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            margin-right: 2.5rem;
+        }
+        .nav-menu a {
+            color: #222;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.2s;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+        }
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: #ffb347;
+        }
+        @media (max-width: 700px) {
+            .main-nav { flex-direction: column; align-items: flex-start; padding: 1rem 0.5rem;}
+            .nav-logo { margin-left: 1rem; margin-bottom: 0.5rem;}
+            .nav-menu { margin-right: 1rem; gap: 1rem; flex-wrap: wrap;}
+        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem;}
+        h1 { text-align: center; margin-bottom: 2rem;}
+        /* Filter */
+        .filter-bar {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: #fff;
+            border: 2px solid #ffb347;
+            color: #ffb347;
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.2s, color 0.2s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: #ffb347;
+            color: #fff;
+        }
+        /* Catalog */
+        .catalog-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .catalog-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            width: 260px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+        .catalog-card:hover {
+            transform: translateY(-10px) scale(1.04);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+        }
+        .catalog-icon {
+            font-size: 2.2rem;
+            color: #ffb347;
+            margin-bottom: 0.7rem;
+        }
+        .catalog-title { font-weight: bold; margin: 0.7rem 0 0.3rem 0;}
+        .catalog-desc { color: #666; font-size: 0.98rem; margin-bottom: 0.7rem;}
+        .catalog-price { color: #ff8800; font-weight: bold; font-size: 1.1rem;}
+        /* Price Calculator */
+        .calc-section {
+            background: #fffbe7;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 2rem;
+            margin: 3rem 0;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .calc-row { margin-bottom: 1.2rem; }
+        .calc-row label { display: block; margin-bottom: 0.3rem; }
+        .calc-row input, .calc-row select {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        .calc-result {
+            font-size: 1.3rem;
+            color: #ffb347;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        /* Comparison Table */
+        .compare-section { margin: 3rem 0; }
+        .compare-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+        }
+        .compare-table th, .compare-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #f0e6d2;
+        }
+        .compare-table th {
+            background: #ffb347;
+            color: #fff;
+            font-weight: bold;
+        }
+        .compare-table tr:last-child td { border-bottom: none; }
+        /* Custom Form */
+        .custom-section {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 2rem;
+            max-width: 500px;
+            margin: 3rem auto 2rem auto;
+        }
+        .custom-section h3 { margin-top: 0;}
+        .custom-row { margin-bottom: 1.2rem; }
+        .custom-row label { display: block; margin-bottom: 0.3rem; }
+        .custom-row input, .custom-row select, .custom-row textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 1rem;
+        }
+        .custom-section button {
+            background: #ffb347;
+            color: #fff;
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .custom-section button:hover { background: #ff8800; }
+        @media (max-width: 900px) {
+            .catalog-list { flex-direction: column; align-items: center;}
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">FastBite</div>
+        <div class="nav-menu">
+            <a href="index.html">Beranda</a>
+            <a href="services.html" class="active">Layanan</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">Tentang Kami</a>
+            <a href="contact.html">Kontak</a>
+            <a href="blog.html">Blog</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1>Layanan & Produk Kami</h1>
+        <!-- Filter Bar -->
+        <div class="filter-bar" id="filter-bar">
+            <button class="filter-btn active" data-filter="all">Semua</button>
+            <button class="filter-btn" data-filter="delivery">Pengantaran</button>
+            <button class="filter-btn" data-filter="promo">Promo</button>
+            <button class="filter-btn" data-filter="premium">Premium</button>
+        </div>
+        <!-- Catalog List -->
+        <div class="catalog-list" id="catalog-list">
+            <!-- Katalog akan diisi dinamis -->
+        </div>
+        <!-- Price Calculator -->
+        <section class="calc-section">
+            <h3>Estimasi Biaya Pengantaran</h3>
+            <div class="calc-row">
+                <label for="calc-service">Pilih Layanan</label>
+                <select id="calc-service">
+                    <option value="reguler" data-price="8000">Reguler</option>
+                    <option value="express" data-price="12000">Express</option>
+                    <option value="premium" data-price="20000">Premium</option>
+                </select>
+            </div>
+            <div class="calc-row">
+                <label for="calc-distance">Jarak (km)</label>
+                <input type="number" id="calc-distance" min="1" max="30" value="3">
+            </div>
+            <div class="calc-row">
+                <label for="calc-qty">Jumlah Pesanan</label>
+                <input type="number" id="calc-qty" min="1" max="10" value="1">
+            </div>
+            <div class="calc-result" id="calc-result">Rp 8.000</div>
+        </section>
+        <!-- Comparison Table -->
+        <section class="compare-section">
+            <h3 style="text-align:center;">Perbandingan Paket Layanan</h3>
+            <table class="compare-table">
+                <tr>
+                    <th>Layanan</th>
+                    <th>Reguler</th>
+                    <th>Express</th>
+                    <th>Premium</th>
+                </tr>
+                <tr>
+                    <td>Estimasi Waktu</td>
+                    <td>30-45 menit</td>
+                    <td>15-25 menit</td>
+                    <td>&lt; 15 menit</td>
+                </tr>
+                <tr>
+                    <td>Biaya Dasar</td>
+                    <td>Rp 8.000</td>
+                    <td>Rp 12.000</td>
+                    <td>Rp 20.000</td>
+                </tr>
+                <tr>
+                    <td>Promo & Diskon</td>
+                    <td>Ya</td>
+                    <td>Ya</td>
+                    <td>Ya</td>
+                </tr>
+                <tr>
+                    <td>Prioritas Kurir</td>
+                    <td>-</td>
+                    <td>Ya</td>
+                    <td>Ya (khusus)</td>
+                </tr>
+                <tr>
+                    <td>Layanan Pelanggan 24 Jam</td>
+                    <td>-</td>
+                    <td>Ya</td>
+                    <td>Ya</td>
+                </tr>
+            </table>
+        </section>
+        <!-- Custom Package Form -->
+        <section class="custom-section">
+            <h3>Kustomisasi Paket Anda</h3>
+            <form id="custom-form">
+                <div class="custom-row">
+                    <label for="custom-name">Nama</label>
+                    <input type="text" id="custom-name" required>
+                </div>
+                <div class="custom-row">
+                    <label for="custom-service">Pilih Layanan</label>
+                    <select id="custom-service" required>
+                        <option value="">-- Pilih --</option>
+                        <option value="reguler">Reguler</option>
+                        <option value="express">Express</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                </div>
+                <div class="custom-row">
+                    <label for="custom-notes">Catatan Tambahan</label>
+                    <textarea id="custom-notes" rows="3"></textarea>
+                </div>
+                <button type="submit">Kirim Permintaan</button>
+                <div id="custom-msg" style="margin-top:1rem;color:#ffb347;font-weight:bold;"></div>
+            </form>
+        </section>
+    </div>
+    <script>
+        // Data katalog layanan/produk
+        const catalogData = [
+            {
+                title: "Pengantaran Reguler",
+                desc: "Layanan antar makanan standar, hemat dan tepat waktu.",
+                price: 8000,
+                icon: "fa-biking",
+                category: "delivery"
+            },
+            {
+                title: "Pengantaran Express",
+                desc: "Prioritas pengantaran lebih cepat untuk pesanan Anda.",
+                price: 12000,
+                icon: "fa-motorcycle",
+                category: "delivery"
+            },
+            {
+                title: "Paket Premium",
+                desc: "Layanan eksklusif dengan kurir khusus dan prioritas tertinggi.",
+                price: 20000,
+                icon: "fa-star",
+                category: "premium"
+            },
+            {
+                title: "Promo Akhir Pekan",
+                desc: "Diskon spesial untuk pesanan di akhir pekan.",
+                price: 5000,
+                icon: "fa-tags",
+                category: "promo"
+            },
+            {
+                title: "Voucher Makan Hemat",
+                desc: "Voucher diskon untuk berbagai restoran favorit.",
+                price: 10000,
+                icon: "fa-ticket-alt",
+                category: "promo"
+            }
+        ];
+
+        // Render katalog
+        function renderCatalog(filter = "all") {
+            const list = document.getElementById('catalog-list');
+            list.innerHTML = '';
+            catalogData.filter(item => filter === "all" || item.category === filter)
+                .forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'catalog-card';
+                    card.innerHTML = `
+                        <div class="catalog-icon"><i class="fas ${item.icon}"></i></div>
+                        <div class="catalog-title">${item.title}</div>
+                        <div class="catalog-desc">${item.desc}</div>
+                        <div class="catalog-price">Rp ${item.price.toLocaleString()}</div>
+                    `;
+                    list.appendChild(card);
+                });
+        }
+        // Filter event
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCatalog();
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.onclick = function() {
+                    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderCatalog(btn.dataset.filter);
+                };
+            });
+        });
+
+        // Price Calculator
+        function updateCalc() {
+            const service = document.getElementById('calc-service');
+            const price = parseInt(service.selectedOptions[0].dataset.price);
+            const distance = Math.max(1, parseInt(document.getElementById('calc-distance').value) || 1);
+            const qty = Math.max(1, parseInt(document.getElementById('calc-qty').value) || 1);
+            // Estimasi: biaya dasar + (jarak-1)*2000 per pesanan
+            const total = (price + ((distance-1)*2000)) * qty;
+            document.getElementById('calc-result').textContent = 'Rp ' + total.toLocaleString();
+        }
+        document.getElementById('calc-service').onchange = updateCalc;
+        document.getElementById('calc-distance').oninput = updateCalc;
+        document.getElementById('calc-qty').oninput = updateCalc;
+        document.addEventListener('DOMContentLoaded', updateCalc);
+
+        // Custom Form
+        document.getElementById('custom-form').onsubmit = function(e) {
+            e.preventDefault();
+            document.getElementById('custom-msg').textContent = "Terima kasih, permintaan Anda telah dikirim!";
+            this.reset();
+        };
+    </script>
+</body>
+</html>

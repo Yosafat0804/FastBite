@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tentang Kami - FastBite</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Google Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body { margin:0; font-family: 'Montserrat', sans-serif; background:#f8f8f8; color:#222;}
+        header {
+            background: #ffb347;
+            color: #fff;
+            padding: 2rem 0 1rem 0;
+            text-align: center;
+        }
+        h1 { margin: 0; font-size: 2.5rem;}
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem;}
+        /* Navbar */
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1000;
+        }
+        .nav-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ffb347;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+        }
+        .nav-menu a {
+            text-decoration: none;
+            color: #222;
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: relative;
+            transition: color 0.2s;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .nav-menu a.active,
+        .nav-menu a:hover {
+            color: #ffb347;
+        }
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: #ffb347;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        .nav-menu a.active::after,
+        .nav-menu a:hover::after {
+            transform: scaleX(1);
+        }
+        @media (max-width: 900px) {
+            .main-nav { flex-direction: column; align-items: flex-start; padding: 1rem 0.5rem;}
+            .nav-logo { margin-left: 1rem; margin-bottom: 0.5rem;}
+            .nav-menu { margin-right: 1rem; gap: 1rem; flex-wrap: wrap;}
+        }
+        /* Timeline */
+        .timeline {
+            position: relative;
+            margin: 3rem 0 4rem 0;
+            padding-left: 40px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: #ffb347;
+            border-radius: 2px;
+        }
+        .timeline-event {
+            position: relative;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(.4,2,.6,1);
+        }
+        .timeline-event.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -8px;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: #fff;
+            border: 4px solid #ffb347;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-content {
+            background: #fff;
+            padding: 1.2rem 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            margin-left: 40px;
+        }
+        .timeline-date {
+            font-weight: bold;
+            color: #ffb347;
+            margin-bottom: 0.3rem;
+        }
+        /* Team */
+        .team-section { margin: 4rem 0 2rem 0; text-align: center;}
+        .team-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .team-card {
+            background: transparent;
+            width: 220px;
+            height: 300px;
+            perspective: 1000px;
+        }
+        .team-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(.4,2,.6,1);
+            transform-style: preserve-3d;
+        }
+        .team-card:hover .team-inner, .team-card:focus-within .team-inner {
+            transform: rotateY(180deg);
+        }
+        .team-front, .team-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #fff;
+        }
+        .team-front img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+        .team-front h4 { margin: 0.5rem 0 0.2rem 0;}
+        .team-front p { margin: 0; color: #888;}
+        .team-back {
+            transform: rotateY(180deg);
+            padding: 1.2rem;
+            font-size: 1rem;
+            color: #444;
+        }
+        /* Stats */
+        .stats-section {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        .stat-box {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 2rem 2.5rem;
+            text-align: center;
+            min-width: 180px;
+        }
+        .stat-number {
+            font-size: 2.2rem;
+            color: #ffb347;
+            font-weight: bold;
+        }
+        .stat-label { color: #666; margin-top: 0.5rem;}
+        /* Values */
+        .values-section { margin: 4rem 0 2rem 0; }
+        .values-list {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .value-card {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 2rem 1.5rem;
+            width: 220px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        .value-card:hover, .value-card.active {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+            background: #fffbe7;
+        }
+        .value-icon {
+            font-size: 2.2rem;
+            color: #ffb347;
+            margin-bottom: 0.7rem;
+        }
+        .value-detail {
+            display: none;
+            color: #555;
+            margin-top: 1rem;
+            font-size: 1rem;
+        }
+        .value-card.active .value-detail { display: block; }
+        @media (max-width: 900px) {
+            .stats-section, .team-cards, .values-list { flex-direction: column; align-items: center;}
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="nav-logo">FastBite</div>
+        <div class="nav-menu">
+            <a href="index.html">Beranda</a>
+            <a href="services.html">Layanan</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html" class="active">Tentang Kami</a>
+            <a href="contact.html">Kontak</a>
+            <a href="blog.html">Blog</a>
+        </div>
+    </nav>
+    <div class="container">
+        <!-- Timeline -->
+        <section>
+            <h2>Perjalanan Kami</h2>
+            <div class="timeline" id="timeline">
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2019</div>
+                        <strong>Didirikan</strong>
+                        <p>FastBite lahir dari keinginan untuk memudahkan masyarakat mendapatkan makanan favorit tanpa repot keluar rumah.</p>
+                    </div>
+                </div>
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2020</div>
+                        <strong>Ekspansi Kota</strong>
+                        <p>Kami memperluas layanan ke 10 kota besar di Indonesia dan bermitra dengan ratusan restoran.</p>
+                    </div>
+                </div>
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2022</div>
+                        <strong>1 Juta Pesanan</strong>
+                        <p>Jumlah pesanan mencapai 1 juta, menandakan kepercayaan pelanggan yang terus tumbuh.</p>
+                    </div>
+                </div>
+                <div class="timeline-event">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
+                        <strong>Inovasi Berkelanjutan</strong>
+                        <p>Kami terus berinovasi dengan fitur baru dan memperluas jangkauan layanan ke seluruh Indonesia.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Team -->
+        <section class="team-section">
+            <h2>Tim Kami</h2>
+            <div class="team-cards">
+                <div class="team-card" tabindex="0">
+                    <div class="team-inner">
+                        <div class="team-front">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="CEO">
+                            <h4>Rizky Pratama</h4>
+                            <p>CEO</p>
+                        </div>
+                        <div class="team-back">
+                            <strong>Rizky Pratama</strong><br>
+                            Penggagas utama dan visioner di balik Food Delivery Service. Berpengalaman di bidang teknologi dan logistik.
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card" tabindex="0">
+                    <div class="team-inner">
+                        <div class="team-front">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="CTO">
+                            <h4>Siti Rahmawati</h4>
+                            <p>CTO</p>
+                        </div>
+                        <div class="team-back">
+                            <strong>Siti Rahmawati</strong><br>
+                            Bertanggung jawab atas pengembangan teknologi dan keamanan aplikasi.
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card" tabindex="0">
+                    <div class="team-inner">
+                        <div class="team-front">
+                            <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="COO">
+                            <h4>Budi Santoso</h4>
+                            <p>COO</p>
+                        </div>
+                        <div class="team-back">
+                            <strong>Budi Santoso</strong><br>
+                            Mengelola operasional harian dan memastikan layanan berjalan lancar.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Stats -->
+        <section class="stats-section">
+            <div class="stat-box">
+                <div class="stat-number" id="stat-users">0</div>
+                <div class="stat-label">Pengguna Aktif</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-orders">0</div>
+                <div class="stat-label">Pesanan Terkirim</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="stat-cities">0</div>
+                <div class="stat-label">Kota Layanan</div>
+            </div>
+        </section>
+        <!-- Values -->
+        <section class="values-section">
+            <h2>Nilai-Nilai Kami</h2>
+            <div class="values-list">
+                <div class="value-card" onclick="toggleValueDetail(this)" tabindex="0">
+                    <div class="value-icon"><i class="fas fa-bolt"></i></div>
+                    <strong>Kecepatan</strong>
+                    <div class="value-detail">Kami berkomitmen mengantar makanan secepat mungkin ke pelanggan.</div>
+                </div>
+                <div class="value-card" onclick="toggleValueDetail(this)" tabindex="0">
+                    <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+                    <strong>Keamanan</strong>
+                    <div class="value-detail">Keamanan data dan makanan pelanggan adalah prioritas utama kami.</div>
+                </div>
+                <div class="value-card" onclick="toggleValueDetail(this)" tabindex="0">
+                    <div class="value-icon"><i class="fas fa-heart"></i></div>
+                    <strong>Kepedulian</strong>
+                    <div class="value-detail">Kami peduli pada kepuasan pelanggan dan mitra restoran.</div>
+                </div>
+                <div class="value-card" onclick="toggleValueDetail(this)" tabindex="0">
+                    <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+                    <strong>Inovasi</strong>
+                    <div class="value-detail">Selalu berinovasi untuk memberikan pengalaman terbaik.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script>
+        // Timeline scroll animation
+        function revealTimeline() {
+            const events = document.querySelectorAll('.timeline-event');
+            const trigger = window.innerHeight * 0.85;
+            events.forEach(event => {
+                const top = event.getBoundingClientRect().top;
+                if (top < trigger) event.classList.add('visible');
+            });
+        }
+        window.addEventListener('scroll', revealTimeline);
+        document.addEventListener('DOMContentLoaded', revealTimeline);
+
+        // Animated Counters
+        function animateCounter(id, target, duration) {
+            let el = document.getElementById(id), start = 0, increment = target / (duration/20);
+            function update() {
+                start += increment;
+                if (start < target) {
+                    el.textContent = Math.floor(start);
+                    setTimeout(update, 20);
+                } else {
+                    el.textContent = target;
+                }
+            }
+            update();
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            animateCounter('stat-users', 1200, 1200);
+            animateCounter('stat-orders', 3500, 1200);
+            animateCounter('stat-cities', 25, 1200);
+        });
+
+        // Interactive Values
+        function toggleValueDetail(card) {
+            document.querySelectorAll('.value-card').forEach(c => c.classList.remove('active'));
+            card.classList.toggle('active');
+        }
+        // Keyboard accessibility for value cards
+        document.querySelectorAll('.value-card').forEach(card => {
+            card.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    toggleValueDetail(card);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
