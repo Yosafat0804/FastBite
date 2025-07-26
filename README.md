@@ -60,7 +60,7 @@ Berikut adalah tampilan utama website FastBite :
 
 ## Teknologi yang Digunakan
 
-- HTML5, CSS3 (tanpa framework), JavaScript
+- HTML , CSS , JavaScript
 - FontAwesome & Google Fonts
 - Google Maps Embed
 
