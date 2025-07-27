@@ -2,176 +2,439 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blog & Berita - FastBite</title>
+    <title>Blog - FastBite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        body { margin:0; font-family: 'Montserrat', sans-serif; background:#f8f8f8; color:#222;}
+        body { margin:0; font-family: 'Montserrat', sans-serif; background:#f8f8f8; color: #222; transition: background 0.3s, color 0.3s;}
         .main-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             background: #fff;
-            padding: 1rem 2.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            box-shadow: 0 2px 8px #ffb34722;
+            padding: 1.2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 100vw;
+            position: relative;
+            z-index: 10;
+            border-bottom: 2px solid #ffb34722;
         }
         .nav-logo {
-            font-size: 1.7rem;
             font-weight: bold;
-            color: #ffb347;
-            letter-spacing: 0.5px;
+            font-size: 2rem;
+            color: #ff8800;
+            margin-left: 2.5rem;
+            letter-spacing: 1px;
             font-family: 'Montserrat', sans-serif;
+            text-shadow: 0 2px 8px #ffb34733;
         }
         .nav-menu {
             display: flex;
+            align-items: center;
             gap: 2.5rem;
+            margin-right: 2.5rem;
+            transition: max-height 0.3s;
         }
         .nav-menu a {
             color: #222;
+            font-weight: bold;
             text-decoration: none;
-            font-weight: bold;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
             transition: color 0.2s;
-        }
-        .nav-menu a.active, .nav-menu a:hover {
-            color: #ffb347;
-        }
-        @media (max-width: 900px) {
-            .main-nav { flex-direction: column; align-items: flex-start; padding: 1rem 0.5rem;}
-            .nav-logo { margin-left: 1rem; margin-bottom: 0.5rem;}
-            .nav-menu { margin-right: 1rem; gap: 1rem; flex-wrap: wrap;}
-        }
-        .container { max-width: 1100px; margin: 0 auto; padding: 2rem;}
-        h1 { text-align: center; margin-bottom: 2rem;}
-        /* Filter & Search */
-        .blog-bar {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-        .blog-category {
-            background: #fff;
-            border: 2px solid #ffb347;
-            color: #ffb347;
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s, color 0.2s;
-        }
-        .blog-category.active, .blog-category:hover {
-            background: #ffb347;
-            color: #fff;
-        }
-        .blog-search {
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-size: 1rem;
-            min-width: 200px;
-        }
-        /* Blog List */
-        .blog-list {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-        .blog-card {
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 1.5rem 2rem;
-            display: flex;
-            gap: 1.5rem;
-            align-items: flex-start;
-            position: relative;
-        }
-        .blog-thumb {
-            width: 120px;
-            height: 90px;
-            object-fit: cover;
-            border-radius: 10px;
-            flex-shrink: 0;
-        }
-        .blog-content {
-            flex: 1;
-        }
-        .blog-title {
-            font-weight: bold;
             font-size: 1.2rem;
-            margin-bottom: 0.3rem;
         }
-        .blog-meta {
+        .nav-menu a.active,
+        .nav-menu a:hover {
             color: #ffb347;
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
         }
-        .blog-desc {
-            color: #666;
-            font-size: 0.98rem;
-            margin-bottom: 0.7rem;
-        }
-        .blog-readtime {
-            color: #888;
-            font-size: 0.95rem;
-            margin-bottom: 0.5rem;
-        }
-        .blog-share {
-            position: absolute;
-            right: 18px;
-            bottom: 18px;
-            display: flex;
-            gap: 0.5rem;
-        }
-        .blog-share button {
-            background: #ffb347;
-            color: #fff;
+        .nav-toggle {
+            background: none;
             border: none;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            font-size: 1.1rem;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-        .blog-share button:hover { background: #ff8800; }
-        /* Pagination */
-        .pagination {
-            display: flex;
-            gap: 0.5rem;
-            justify-content: center;
-            margin: 2rem 0 0 0;
-        }
-        .pagination-btn {
-            background: #fff;
-            border: 2px solid #ffb347;
+            margin-right: 1.5rem;
             color: #ffb347;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background 0.2s, color 0.2s;
+            transition: color 0.3s;
         }
-        .pagination-btn.active, .pagination-btn:hover {
+        .nav-toggle:focus { outline: 2px solid #ffb347; }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-right: 1.5rem;
+            z-index: 20;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 4px;
             background: #ffb347;
-            color: #fff;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: 0.3s;
         }
         @media (max-width: 700px) {
-            .blog-card { flex-direction: column; align-items: stretch;}
-            .blog-thumb { width: 100%; height: 150px;}
+            .main-nav { flex-direction: column; align-items: flex-start; padding: 1rem 0.5rem;}
+            .nav-logo { margin-left: 1rem; margin-bottom: 0.5rem;}
+            .nav-menu {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 0.5rem;
+                margin-right: 0;
+                max-height: 0;
+                overflow: hidden;
+                background: #fff;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            .nav-menu.open {
+                max-height: 400px;
+                padding-bottom: 1rem;
+            }
+            .hamburger { display: flex; }
+        }
+        /* Dark mode */
+        .dark-mode body { background: #181818; color: #ffd699; }
+        .dark-mode .main-nav { background: #232323; box-shadow: 0 2px 8px #ffb34733; border-bottom: 2px solid #ffb34744;}
+        .dark-mode .nav-logo { color: #ffd699; }
+        .dark-mode .nav-menu a { color: #eee; }
+        .dark-mode .nav-menu a.active,
+        .dark-mode .nav-menu a:hover { color: #ffb347; }
+        .dark-mode .nav-toggle { color: #ffd699; }
+        .dark-mode .hero { background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1500&q=80') center/cover fixed; }
+        .dark-mode .blog-list { background: #232323; }
+        .dark-mode .blog-card { background: #232323cc; color: #ffd699; border: 1.5px solid #ffb34733;}
+        .dark-mode .blog-card:hover { box-shadow: 0 8px 32px #000c; }
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 45vh;
+            background: linear-gradient(120deg, #ffb347cc 0%, #ff8800cc 100%), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1500&q=80') center/cover fixed;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(6px);
+            z-index: 1;
+        }
+        .hero > * {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .hero p { font-size: 1.2rem; color: #fff; opacity: 0.95;}
+        /* Blog List */
+        .blog-list {
+            max-width: 1100px;
+            margin: 3rem auto 2rem auto;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .blog-card {
+            background: linear-gradient(135deg, #fff 80%, #ffe0b2 100%);
+            border-radius: 22px;
+            box-shadow: 0 8px 32px #ffb34733, 0 2px 12px #ffb34722;
+            border: none;
+            width: 350px;
+            overflow: hidden;
+            transition: transform 0.22s, box-shadow 0.22s;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            position: relative;
+        }
+        .blog-card:hover {
+            transform: translateY(-10px) scale(1.035);
+            box-shadow: 0 16px 40px #ffb34744, 0 4px 16px #ffb34755;
+        }
+        .blog-img {
+            width: 100%;
+            height: 190px;
+            object-fit: cover;
+            border-top-left-radius: 22px;
+            border-top-right-radius: 22px;
+            box-shadow: 0 2px 12px #ffb34722;
+        }
+        .blog-content {
+            padding: 1.5rem 1.3rem 1.7rem 1.3rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: transparent;
+        }
+        .blog-title {
+            font-size: 1.35rem;
+            font-weight: 900;
+            color: #ff8800;
+            margin-bottom: 0.4rem;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+            text-shadow: 0 2px 8px #ffb34722;
+        }
+        .blog-meta {
+            font-size: 0.97rem;
+            color: #888;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+        .blog-desc {
+            font-size: 1.08rem;
+            color: #333;
+            flex: 1;
+            margin-bottom: 1.1rem;
+        }
+        .read-more {
+            margin-top: 0.5rem;
+            color: #fff;
+            background: linear-gradient(90deg, #ffb347 60%, #ff8800 100%);
+            font-weight: bold;
+            text-decoration: none;
+            align-self: flex-start;
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            font-size: 1.05rem;
+            box-shadow: 0 2px 8px #ffb34733;
+            transition: background 0.2s, color 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+        }
+        .read-more:hover {
+            background: linear-gradient(90deg, #ff8800 60%, #ffb347 100%);
+            color: #fff;
+        }
+        .share-btn {
+            background: #fff3e0;
+            border: none;
+            cursor: pointer;
+            color: #ff8800;
+            font-size: 1.25rem;
+            border-radius: 50%;
+            width: 2.3rem;
+            height: 2.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 0.7rem;
+            transition: background 0.2s, color 0.2s;
+            box-shadow: 0 2px 8px #ffb34722;
+        }
+        .share-btn:hover {
+            background: #ffb347;
+            color: #fff;
+        }
+        .share-popup {
+            display: none;
+            position: absolute;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 12px #ffb34733;
+            padding: 0.8rem 1.2rem;
+            z-index: 99;
+            margin-top: 0.5rem;
+            right: 1.5rem;
+            top: 70%;
+        }
+        .share-sim {
+            margin-left: 0.8rem;
+            cursor: pointer;
+            font-size: 1.15rem;
+            transition: color 0.2s;
+        }
+        .share-sim:hover { opacity: 0.7; }
+        .blog-controls {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2.5rem auto 1.2rem auto;
+            max-width: 900px;
+            flex-wrap: wrap;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 2px 16px #ffb34718;
+            padding: 1.2rem 2rem;
+        }
+        .blog-controls label {
+            font-weight: 700;
+            color: #ff8800;
+            margin-right: 0.5rem;
+            font-size: 1.13rem;
+            letter-spacing: 0.2px;
+        }
+        .blog-controls select,
+        .blog-controls input[type="text"] {
+            padding: 0.6rem 1.1rem;
+            border-radius: 8px;
+            border: 1.5px solid #ffb347;
+            font-size: 1.08rem;
+            outline: none;
+            background: #fff;
+            transition: border 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 6px #ffb34711;
+        }
+        .blog-controls select:focus,
+        .blog-controls input[type="text"]:focus {
+            border: 1.5px solid #ff8800;
+            box-shadow: 0 2px 8px #ffb34733;
+        }
+        .blog-controls select:hover,
+        .blog-controls input[type="text"]:hover {
+            border: 1.5px solid #ff8800;
+        }
+        @media (max-width: 600px) {
+            .blog-controls {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.7rem;
+                max-width: 98vw;
+                padding: 1rem 0.5rem;
+            }
+            .blog-controls label {
+                margin-bottom: 0.2rem;
+            }
+        }
+        /* Pagination Styling */
+        #pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.7rem;
+            margin-bottom: 1.5rem;
+        }
+        .pag-btn {
+            padding: 0.45rem 1.15rem;
+            border-radius: 10px;
+            border: 1.5px solid #ffb347;
+            background: #fff;
+            color: #ff8800;
+            font-weight: 700;
+            font-size: 1.08rem;
+            cursor: pointer;
+            transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+            box-shadow: 0 1px 6px #ffb34711;
+        }
+        .pag-btn:hover {
+            background: #ffb347;
+            color: #fff;
+            box-shadow: 0 2px 8px #ffb34733;
+        }
+        .pag-btn.active,
+        .pag-btn[aria-current="page"] {
+            background: #ff8800;
+            color: #fff;
+            border-color: #ff8800;
+            box-shadow: 0 2px 8px #ffb34733;
+        }
+        .dark-mode .blog-controls {
+            background: #232323;
+            box-shadow: 0 2px 16px #0005;
+        }
+        .dark-mode .blog-controls select,
+        .dark-mode .blog-controls input[type="text"] {
+            background: #181818;
+            color: #ffd699;
+            border: 1.5px solid #ffb347;
+        }
+        .dark-mode .blog-controls select:focus,
+        .dark-mode .blog-controls input[type="text"]:focus {
+            border: 1.5px solid #ffd699;
+        }
+        .dark-mode .pag-btn {
+            background: #232323;
+            color: #ffd699;
+            border: 1.5px solid #ffb347;
+        }
+        .dark-mode .pag-btn:hover {
+            background: #ffb347;
+            color: #232323;
+        }
+        .dark-mode .pag-btn.active,
+        .dark-mode .pag-btn[aria-current="page"] {
+            background: #ff8800;
+            color: #fff;
+            border-color: #ff8800;
+        }
+        /* Modal Styles */
+        #blogModal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.45);
+            align-items: center;
+            justify-content: center;
+        }
+        #blogModal .modal-content {
+            background: #fff;
+            max-width: 500px;
+            width: 90vw;
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            box-shadow: 0 8px 32px #0005;
+        }
+        #blogModal .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #ff8800;
+        }
+        #blogModal #modalImg {
+            width: 100%;
+            border-radius: 12px;
+            max-height: 220px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+        }
+        #blogModal #modalTitle {
+            color: #ff8800;
+            margin-bottom: 0.5rem;
+        }
+        #blogModal #modalMeta {
+            color: #888;
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+        }
+        #blogModal #modalDesc {
+            color: #222;
+            font-size: 1.08rem;
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="main-nav">
-        <div class="nav-logo">FastBite</div>
-        <div class="nav-menu">
+        <div class="nav-logo">
+            <i class="fas fa-utensils" style="margin-right: 0.6rem; color: #ffb347;"></i>
+            FastBite
+        </div>
+        <button class="nav-toggle" id="darkToggle" aria-label="Toggle dark mode" title="Dark Mode">
+            <i class="fa fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger" aria-label="Toggle menu" tabindex="0">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-menu" id="nav-menu">
             <a href="index.html">Beranda</a>
             <a href="services.html">Layanan</a>
             <a href="portfolio.html">Portfolio</a>
@@ -180,166 +443,239 @@
             <a href="blog.html" class="active">Blog</a>
         </div>
     </nav>
-    <div class="container">
-        <h1>Blog & Berita</h1>
-        <!-- Filter & Search -->
-        <div class="blog-bar">
-            <button class="blog-category active" data-cat="all">Semua</button>
-            <button class="blog-category" data-cat="tips">Tips</button>
-            <button class="blog-category" data-cat="promo">Promo</button>
-            <button class="blog-category" data-cat="berita">Berita</button>
-            <input type="text" class="blog-search" id="blog-search" placeholder="Cari artikel...">
-        </div>
-        <!-- Blog List -->
-        <div class="blog-list" id="blog-list">
-            <!-- Diisi dinamis -->
-        </div>
-        <!-- Pagination -->
-        <div class="pagination" id="pagination"></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Blog FastBite</h1>
+        <p>Tips, info kuliner, dan update terbaru seputar layanan FastBite.</p>
+    </section>
+    <!-- Blog Controls -->
+    <div class="blog-controls">
+        <label for="categoryFilter">Kategori:</label>
+        <select id="categoryFilter">
+            <!-- Options will be injected by JS -->
+        </select>
+        <label for="searchInput" style="margin-left:1.5rem;">Cari:</label>
+        <input id="searchInput" type="text" placeholder="Cari artikel...">
+    </div>
+    <div id="pagination" style="display:flex;justify-content:center;gap:0.5rem;margin-bottom:1.5rem;"></div>
+    <!-- Blog List -->
+    <section class="blog-list" id="blog-list">
+        <!-- Blog cards will be loaded here -->
+    </section>
+    <!-- Modal untuk detail blog -->
+    <div id="blogModal" style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.45);align-items:center;justify-content:center;">
+      <div style="background:#fff;max-width:500px;width:90vw;border-radius:16px;padding:2rem;position:relative;box-shadow:0 8px 32px #0005;">
+        <button id="closeModal" style="position:absolute;top:1rem;right:1rem;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#ff8800;"><i class="fa fa-times"></i></button>
+        <img id="modalImg" src="" alt="" style="width:100%;border-radius:12px;max-height:220px;object-fit:cover;margin-bottom:1rem;">
+        <h2 id="modalTitle" style="color:#ff8800;margin-bottom:0.5rem;"></h2>
+        <div id="modalMeta" style="color:#888;font-size:0.98rem;margin-bottom:1rem;"></div>
+        <div id="modalDesc" style="color:#222;font-size:1.08rem;"></div>
+      </div>
     </div>
     <script>
-        // Data artikel blog
-        const blogData = [
+        // Dark mode toggle
+        const darkToggle = document.getElementById('darkToggle');
+        function setDarkMode(on) {
+            if(on) {
+                document.documentElement.classList.add('dark-mode');
+                localStorage.setItem('darkMode', '1');
+                darkToggle.innerHTML = '<i class="fa fa-sun"></i>';
+                darkToggle.title = "Light Mode";
+            } else {
+                document.documentElement.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', '0');
+                darkToggle.innerHTML = '<i class="fa fa-moon"></i>';
+                darkToggle.title = "Dark Mode";
+            }
+        }
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const saved = localStorage.getItem('darkMode');
+        setDarkMode(saved === null ? prefersDark : saved === '1');
+        darkToggle.onclick = () => setDarkMode(!document.documentElement.classList.contains('dark-mode'));
+
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+        hamburger.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') navMenu.classList.toggle('open');
+        });
+
+        // Blog data
+        const blogs = [
             {
-                title: "5 Tips Memesan Makanan Online yang Aman",
-                cat: "tips",
-                date: "2025-07-01",
-                thumb: "https://image.idntimes.com/post/20240124/photo-1695654393816-2c6bfe301c32-8f4726724a317a02dc11c1cc59fa734c-209fe4e54657b37c12fc3e18d7898b13.jpeg?tr=w-1200,f-webp,q-75&width=1200&format=webp&quality=75",
-                desc: "Agar pesanan Anda selalu aman dan nyaman, simak tips berikut sebelum checkout.",
-                content: "Pesan makanan online kini semakin mudah. Namun, keamanan tetap harus diutamakan. Berikut 5 tips: 1) Pilih restoran terpercaya. 2) Cek ulasan pelanggan. 3) Gunakan metode pembayaran aman. 4) Jangan bagikan data pribadi. 5) Pastikan alamat pengantaran benar."
+                title: "5 Tips Memesan Makanan Online yang Aman & Cepat",
+                date: "20 Juli 2025",
+                author: "Admin FastBite",
+                img: "https://image.idntimes.com/post/20240124/photo-1695654393816-2c6bfe301c32-8f4726724a317a02dc11c1cc59fa734c-209fe4e54657b37c12fc3e18d7898b13.jpeg?tr=w-1200,f-webp,q-75&width=1200&format=webp&quality=75",
+                desc: "Agar pesanan Anda selalu aman dan cepat sampai, simak tips berikut sebelum memesan makanan online di FastBite.",
+                link: "#",
+                category: "Tips"
             },
             {
-                title: "Promo Spesial Akhir Pekan: Diskon 30%",
-                cat: "promo",
-                date: "2025-07-05",
-                thumb: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
-                desc: "Nikmati diskon spesial untuk semua pesanan di akhir pekan ini. Cek syarat dan ketentuannya!",
-                content: "Promo berlaku untuk semua pengguna baru dan lama. Gunakan kode WEEKEND30 saat checkout. Promo hanya berlaku Jumat-Minggu."
+                title: "Rekomendasi Kuliner Malam Favorit di Kota Anda",
+                date: "15 Juli 2025",
+                author: "Tim FastBite",
+                img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=600&q=80",
+                desc: "Dari sate hingga ramen, berikut daftar kuliner malam yang wajib dicoba dan bisa dipesan lewat FastBite.",
+                link: "#",
+                category: "Kuliner"
             },
             {
-                title: "Food Delivery Service Buka Cabang Baru di Bandung",
-                cat: "berita",
-                date: "2025-06-20",
-                thumb: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80",
-                desc: "Kini layanan kami hadir di Bandung! Pesan makanan favorit Anda dengan lebih cepat.",
-                content: "Dengan dibukanya cabang baru di Bandung, kami siap melayani lebih banyak pelanggan di Jawa Barat. Nikmati promo khusus pembukaan cabang!"
-            },
-            {
-                title: "Cara Menggunakan Kode Promo di Aplikasi",
-                cat: "tips",
-                date: "2025-06-15",
-                thumb: "https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80",
-                desc: "Panduan mudah menggunakan kode promo agar hemat saat pesan makanan.",
-                content: "Masukkan kode promo pada halaman checkout sebelum melakukan pembayaran. Pastikan kode masih berlaku dan sesuai syarat promo."
-            },
-            {
-                title: "Update Fitur: Live Chat Customer Service",
-                cat: "berita",
-                date: "2025-06-10",
-                thumb: "https://images.unsplash.com/photo-1506089676908-3592f7389d4d?auto=format&fit=crop&w=400&q=80",
-                desc: "Kini Anda bisa konsultasi langsung dengan CS kami lewat fitur live chat.",
-                content: "Fitur live chat tersedia 24 jam untuk membantu Anda menyelesaikan kendala atau pertanyaan seputar layanan kami."
+                title: "Cara Mendapatkan Promo & Diskon di FastBite",
+                date: "10 Juli 2025",
+                author: "Admin FastBite",
+                img: "https://slimfaq.s3.amazonaws.com/uploads/trix/1606/3475/34098/808fc318-c8f6-4d8c-af3c-58c03911749e",
+                desc: "Mau hemat saat pesan makanan? Ikuti tips berikut untuk mendapatkan promo dan diskon menarik di FastBite.",
+                link: "#",
+                category: "Promo"
             }
         ];
-
-        // --- Blog CMS Logic ---
-        const perPage = 3;
+        // --- UI Filter, Search, dan Pagination ---
+        const categories = ["Semua", ...new Set(blogs.map(b => b.category))];
+        let currentCategory = "Semua";
         let currentPage = 1;
-        let currentCat = "all";
-        let currentSearch = "";
+        const perPage = 2;
+        let searchQuery = "";
 
-        function calcReadTime(text) {
-            // 200 kata/menit
+        // Inject category options
+        const catSelect = document.getElementById('categoryFilter');
+        catSelect.innerHTML = categories.map(cat => `<option value="${cat}">${cat}</option>`).join('');
+
+        // --- Fungsi waktu baca ---
+        function estimateReadTime(text) {
             const words = text.split(/\s+/).length;
-            return Math.max(1, Math.round(words / 200));
+            const minutes = Math.max(1, Math.round(words / 200));
+            return `${minutes} menit baca`;
         }
 
-        function renderBlog() {
-            const list = document.getElementById('blog-list');
-            let filtered = blogData.filter(b =>
-                (currentCat === "all" || b.cat === currentCat) &&
-                (b.title.toLowerCase().includes(currentSearch) || b.desc.toLowerCase().includes(currentSearch) || b.content.toLowerCase().includes(currentSearch))
+        // --- Render Blog dengan filter, search, dan paginasi ---
+        function renderBlogs() {
+            let filtered = blogs.filter(b =>
+                (currentCategory === "Semua" || b.category === currentCategory) &&
+                (b.title.toLowerCase().includes(searchQuery) || b.desc.toLowerCase().includes(searchQuery))
             );
-            const total = filtered.length;
-            const totalPages = Math.ceil(total / perPage);
+            const totalPages = Math.ceil(filtered.length / perPage);
             if (currentPage > totalPages) currentPage = 1;
             const start = (currentPage - 1) * perPage;
-            const end = start + perPage;
-            list.innerHTML = '';
-            filtered.slice(start, end).forEach(b => {
+            const pageBlogs = filtered.slice(start, start + perPage);
+
+            const blogList = document.getElementById('blog-list');
+            blogList.innerHTML = '';
+            pageBlogs.forEach((blog, idx) => {
                 const card = document.createElement('div');
                 card.className = 'blog-card';
                 card.innerHTML = `
-                    <img src="${b.thumb}" class="blog-thumb" alt="${b.title}">
+                    <img src="${blog.img}" alt="${blog.title}" class="blog-img">
                     <div class="blog-content">
-                        <div class="blog-title">${b.title}</div>
-                        <div class="blog-meta">${capitalize(b.cat)} &bull; ${formatDate(b.date)}</div>
-                        <div class="blog-readtime"><i class="fa fa-clock"></i> ${calcReadTime(b.content)} menit baca</div>
-                        <div class="blog-desc">${b.desc}</div>
-                    </div>
-                    <div class="blog-share">
-                        <button title="Bagikan ke WhatsApp" onclick="shareTo('wa','${b.title}')"><i class="fab fa-whatsapp"></i></button>
-                        <button title="Bagikan ke Facebook" onclick="shareTo('fb','${b.title}')"><i class="fab fa-facebook-f"></i></button>
-                        <button title="Bagikan ke Twitter" onclick="shareTo('tw','${b.title}')"><i class="fab fa-twitter"></i></button>
+                        <div class="blog-title">${blog.title}</div>
+                        <div class="blog-meta">${blog.date} &bull; ${blog.author} &bull; <span style="color:#ffb347">${estimateReadTime(blog.desc)}</span></div>
+                        <div class="blog-desc">${blog.desc}</div>
+                        <div style="margin-top:1rem;display:flex;gap:0.7rem;">
+                            <a href="#" class="read-more">Baca Selengkapnya <i class="fa fa-arrow-right"></i></a>
+                            <button class="share-btn" style="background:none;border:none;cursor:pointer;color:#ffb347;font-size:1.1rem;" title="Bagikan ke Sosial Media">
+                                <i class="fa fa-share-alt"></i>
+                            </button>
+                        </div>
+                        <div class="share-popup" style="display:none;position:absolute;background:#fff;border-radius:10px;box-shadow:0 2px 12px #ffb34733;padding:0.8rem 1.2rem;z-index:99;margin-top:0.5rem;">
+                            <span style="font-size:0.95rem;">Bagikan ke:</span>
+                            <span class="share-sim" style="margin-left:0.7rem;cursor:pointer;color:#4267B2;"><i class="fab fa-facebook"></i></span>
+                            <span class="share-sim" style="margin-left:0.7rem;cursor:pointer;color:#1DA1F2;"><i class="fab fa-twitter"></i></span>
+                            <span class="share-sim" style="margin-left:0.7rem;cursor:pointer;color:#25D366;"><i class="fab fa-whatsapp"></i></span>
+                        </div>
                     </div>
                 `;
-                list.appendChild(card);
+                // Simulasi share popup
+                card.querySelector('.share-btn').onclick = function(e) {
+                    e.stopPropagation();
+                    const popup = card.querySelector('.share-popup');
+                    popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+                };
+                card.querySelectorAll('.share-sim').forEach(btn => {
+                    btn.onclick = function(e) {
+                        e.stopPropagation();
+                        alert('Simulasi berbagi ke sosial media!');
+                        card.querySelector('.share-popup').style.display = 'none';
+                    };
+                });
+                // Tutup popup jika klik di luar
+                document.addEventListener('click', function hidePopup(ev) {
+                    if (!card.contains(ev.target)) card.querySelector('.share-popup').style.display = 'none';
+                }, { once: true });
+                // Tambahkan event untuk "Baca Selengkapnya"
+                card.querySelector('.read-more').onclick = function(e) {
+                    e.preventDefault();
+                    document.getElementById('modalImg').src = blog.img;
+                    document.getElementById('modalTitle').textContent = blog.title;
+                    document.getElementById('modalMeta').textContent = `${blog.date} • ${blog.author} • ${estimateReadTime(blog.desc)}`;
+                    document.getElementById('modalDesc').textContent = blog.desc;
+                    document.getElementById('blogModal').style.display = 'flex';
+                };
+                blogList.appendChild(card);
             });
-            renderPagination(totalPages);
-        }
 
-        function renderPagination(totalPages) {
+            // Render pagination
             const pag = document.getElementById('pagination');
             pag.innerHTML = '';
             for (let i = 1; i <= totalPages; i++) {
-                const btn = document.createElement('button');
-                btn.className = 'pagination-btn' + (i === currentPage ? ' active' : '');
-                btn.textContent = i;
-                btn.onclick = () => {
-                    currentPage = i;
-                    renderBlog();
-                };
-                pag.appendChild(btn);
+                pag.innerHTML += `<button class="pag-btn${i===currentPage?' active':''}" aria-current="${i===currentPage?'page':''}">${i}</button>`;
             }
+            document.querySelectorAll('.pag-btn').forEach((btn, idx) => {
+                btn.onclick = () => { currentPage = idx + 1; renderBlogs(); };
+            });
         }
 
-        function capitalize(str) {
-            return str.charAt(0).toUpperCase() + str.slice(1);
-        }
-        function formatDate(dateStr) {
-            const d = new Date(dateStr);
-            return d.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+        // --- Event listeners untuk filter dan search ---
+        document.getElementById('categoryFilter').onchange = function() {
+            currentCategory = this.value;
+            currentPage = 1;
+            renderBlogs();
+        };
+        document.getElementById('searchInput').oninput = function() {
+            searchQuery = this.value.toLowerCase();
+            currentPage = 1;
+            renderBlogs();
+        };
+
+        // --- Inisialisasi ---
+        renderBlogs();
+
+        // --- Modal Blog Detail ---
+        const blogModal = document.getElementById('blogModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalMeta = document.getElementById('modalMeta');
+        const modalDesc = document.getElementById('modalDesc');
+
+        function openModal(blog) {
+            modalImg.src = blog.img;
+            modalTitle.innerText = blog.title;
+            modalMeta.innerHTML = `${blog.date} &bull; ${blog.author} &bull; <span style="color:#ffb347">${estimateReadTime(blog.desc)}</span>`;
+            modalDesc.innerText = blog.desc;
+            blogModal.style.display = 'flex';
         }
 
-        // --- Category & Search ---
-        document.querySelectorAll('.blog-category').forEach(btn => {
-            btn.onclick = function() {
-                document.querySelectorAll('.blog-category').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                currentCat = btn.dataset.cat;
-                currentPage = 1;
-                renderBlog();
+        closeModal.onclick = () => {
+            blogModal.style.display = 'none';
+        };
+        document.getElementById('closeModal').onclick = function() {
+            document.getElementById('blogModal').style.display = 'none';
+        };
+        document.getElementById('blogModal').onclick = function(e) {
+            if (e.target === this) this.style.display = 'none';
+        };
+
+        // Tambahkan event listener untuk setiap card blog
+        document.querySelectorAll('.blog-card').forEach(card => {
+            card.onclick = () => {
+                const blogTitle = card.querySelector('.blog-title').innerText;
+                const blog = blogs.find(b => b.title === blogTitle);
+                if (blog) openModal(blog);
             };
         });
-        document.getElementById('blog-search').oninput = function() {
-            currentSearch = this.value.toLowerCase();
-            currentPage = 1;
-            renderBlog();
-        };
-
-        // --- Simulasi Share ---
-        window.shareTo = function(type, title) {
-            let url = encodeURIComponent(window.location.href);
-            let text = encodeURIComponent(title + " - Food Delivery Service");
-            let shareUrl = "#";
-            if (type === "wa") shareUrl = `https://wa.me/?text=${text}%20${url}`;
-            if (type === "fb") shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${text}`;
-            if (type === "tw") shareUrl = `https://twitter.com/intent/tweet?text=${text}&url=${url}`;
-            window.open(shareUrl, "_blank");
-        };
-
-        // --- Init ---
-        document.addEventListener('DOMContentLoaded', renderBlog);
     </script>
 </body>
 </html>

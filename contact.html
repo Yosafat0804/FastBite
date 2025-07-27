@@ -2,37 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Kontak Kami - FastBite</title>
+    <title>Kontak | FastBite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Google Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        body { margin:0; font-family: 'Montserrat', sans-serif; background:#f8f8f8; color:#222;}
+        body { margin:0; font-family: 'Montserrat', sans-serif; background:#f8f8f8; color: #222; transition: background 0.3s, color 0.3s;}
         .main-nav {
             background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            padding: 1rem 0;
+            box-shadow: 0 2px 8px #ffb34722;
+            padding: 1.2rem 0;
             display: flex;
             align-items: center;
             justify-content: space-between;
             max-width: 100vw;
             position: relative;
             z-index: 10;
+            border-bottom: 2px solid #ffb34722;
         }
         .nav-logo {
             font-weight: bold;
-            font-size: 1.7rem;
-            color: #ffb347;
+            font-size: 2rem;
+            color: #ff8800;
             margin-left: 2.5rem;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
             font-family: 'Montserrat', sans-serif;
+            text-shadow: 0 2px 8px #ffb34733;
+        }
+        .nav-logo i {
+            margin-right: 0.6rem;
+            color: #ffb347;
         }
         .nav-menu {
             display: flex;
             align-items: center;
             gap: 2.5rem;
             margin-right: 2.5rem;
+            transition: max-height 0.3s;
         }
         .nav-menu a {
             color: #222;
@@ -46,196 +53,188 @@
         .nav-menu a:hover {
             color: #ffb347;
         }
-        @media (max-width: 900px) {
-            .main-nav { flex-direction: column; align-items: flex-start;}
-            .nav-logo { margin-left: 1.2rem; margin-bottom: 0.7rem;}
-            .nav-menu { margin-right: 1.2rem; gap: 1rem; flex-wrap: wrap;}
-        }
-        .container { max-width: 1100px; margin: 0 auto; padding: 2rem;}
-        h1 { text-align: center; margin-bottom: 2rem;}
-        /* Contact Form */
-        .contact-section {
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 2rem;
-            max-width: 500px;
-            margin: 2rem auto;
-        }
-        .contact-row { margin-bottom: 1.2rem; }
-        .contact-row label { display: block; margin-bottom: 0.3rem; }
-        .contact-row input, .contact-row textarea {
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-size: 1rem;
-        }
-        .contact-section button {
-            background: #ffb347;
-            color: #fff;
+        .nav-toggle {
+            background: none;
             border: none;
-            padding: 0.8rem 2rem;
-            font-size: 1.1rem;
-            border-radius: 30px;
+            font-size: 1.5rem;
             cursor: pointer;
-            transition: background 0.3s;
-        }
-        .contact-section button:hover { background: #ff8800; }
-        .form-error {
-            color: #e74c3c;
-            font-size: 0.95rem;
-            margin-top: 0.2rem;
-        }
-        .form-success {
-            color: #27ae60;
-            font-size: 1rem;
-            margin-top: 0.7rem;
-            font-weight: bold;
-        }
-        /* Map */
-        .map-section {
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 700px;
-        }
-        .map-title { font-weight: bold; margin-bottom: 1rem;}
-        .map-container {
-            width: 100%;
-            height: 350px;
-            border-radius: 12px;
-            overflow: hidden;
-            margin-bottom: 1rem;
-        }
-        .office-list {
-            display: flex;
-            gap: 2rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .office-marker {
-            background: #fffbe7;
-            border-radius: 10px;
-            padding: 1rem 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            margin-bottom: 1rem;
-            cursor: pointer;
-            border: 2px solid #ffb347;
-            transition: background 0.2s, border 0.2s;
-        }
-        .office-marker.active, .office-marker:hover {
-            background: #ffb347;
-            color: #fff;
-            border: 2px solid #ffb347;
-        }
-        /* Live Chat */
-        .chat-section {
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 2rem;
-            max-width: 400px;
-            margin: 2rem auto;
-        }
-        .chat-title { font-weight: bold; margin-bottom: 1rem;}
-        .chat-box {
-            background: #f8f8f8;
-            border-radius: 10px;
-            height: 180px;
-            overflow-y: auto;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border: 1px solid #eee;
-            font-size: 1rem;
-        }
-        .chat-msg {
-            margin-bottom: 0.7rem;
-        }
-        .chat-msg.user { text-align: right; color: #ffb347;}
-        .chat-msg.bot { text-align: left; color: #444;}
-        .chat-input-row {
-            display: flex;
-            gap: 0.5rem;
-        }
-        .chat-input-row input {
-            flex: 1;
-            padding: 0.5rem;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-size: 1rem;
-        }
-        .chat-input-row button {
-            background: #ffb347;
-            color: #fff;
-            border: none;
-            padding: 0.5rem 1.2rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-        /* FAQ */
-        .faq-section {
-            background: #fff;
-            border-radius: 14px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 2rem;
-            max-width: 700px;
-            margin: 2rem auto;
-        }
-        .faq-title { font-weight: bold; margin-bottom: 1rem;}
-        .faq-search {
-            width: 100%;
-            padding: 0.5rem;
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            font-size: 1rem;
-            margin-bottom: 1.2rem;
-        }
-        .faq-list { margin: 0; padding: 0; list-style: none;}
-        .faq-item {
-            border-bottom: 1px solid #f0e6d2;
-            padding: 1rem 0;
-        }
-        .faq-question {
-            font-weight: bold;
-            cursor: pointer;
-            position: relative;
-            padding-right: 2rem;
-        }
-        .faq-question::after {
-            content: '+';
-            position: absolute;
-            right: 0;
-            top: 0;
+            margin-right: 1.5rem;
             color: #ffb347;
-            font-size: 1.2rem;
-            transition: transform 0.2s;
+            transition: color 0.3s;
         }
-        .faq-item.active .faq-question::after {
-            content: '-';
-            transform: rotate(180deg);
-        }
-        .faq-answer {
+        .nav-toggle:focus { outline: 2px solid #ffb347; }
+        .hamburger {
             display: none;
+            flex-direction: column;
+            cursor: pointer;
+            margin-right: 1.5rem;
+            z-index: 20;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 4px;
+            background: #ffb347;
+            margin: 4px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+        @media (max-width: 700px) {
+            .main-nav { flex-direction: column; align-items: flex-start; padding: 1rem 0.5rem;}
+            .nav-logo { margin-left: 1rem; margin-bottom: 0.5rem;}
+            .nav-menu {
+                flex-direction: column;
+                align-items: flex-start;
+                width: 100%;
+                gap: 0.5rem;
+                margin-right: 0;
+                max-height: 0;
+                overflow: hidden;
+                background: #fff;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            }
+            .nav-menu.open {
+                max-height: 400px;
+                padding-bottom: 1rem;
+            }
+            .hamburger { display: flex; }
+        }
+        /* Contact Section */
+        .contact-section {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(120deg, #ffb347cc 0%, #ff8800cc 100%), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1500&q=80') center/cover fixed;
+            position: relative;
+            padding: 3rem 1rem;
+        }
+        .contact-section::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(6px);
+            z-index: 1;
+        }
+        .contact-container {
+            position: relative;
+            z-index: 2;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(255,179,71,0.10), 0 1.5px 8px #ffb34733;
+            padding: 2.5rem 2rem;
+            max-width: 420px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 1s;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .contact-container h2 {
+            color: #ff8800;
+            margin-bottom: 1.2rem;
+            font-size: 2rem;
+        }
+        .contact-info {
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
             color: #555;
-            margin-top: 0.7rem;
         }
-        .faq-item.active .faq-answer { display: block; }
-        @media (max-width: 900px) {
-            .main-nav { flex-direction: column; align-items: flex-start;}
-            .nav-logo { margin-left: 1.2rem; margin-bottom: 0.7rem;}
-            .nav-menu { margin-right: 1.2rem; gap: 1rem; flex-wrap: wrap;}
-            .office-list { flex-direction: column; align-items: center;}
+        .contact-info i {
+            color: #ffb347;
+            margin-right: 0.7rem;
         }
+        .contact-form {
+            text-align: left;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+            color: #ff8800;
+            font-size: 1rem;
+            letter-spacing: 0.2px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            margin-bottom: 1.1rem;
+            border: 1.5px solid #ffb34744;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Montserrat', sans-serif;
+            background: #fff;
+            transition: border 0.2s;
+            color: #222;
+            text-align: left;
+            box-sizing: border-box;
+        }
+        .contact-form textarea { min-height: 90px; resize: vertical;}
+        .contact-form .cta-btn {
+            display: block;
+            margin: 0 auto 0.5rem auto;
+        }
+        .cta-btn {
+            background: linear-gradient(90deg, #ffb347 0%, #ff8800 100%);
+            color: #fff;
+            border: none;
+            padding: 1.1rem 2.5rem;
+            font-size: 1.1rem;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 16px #ffb34744;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .cta-btn:hover {
+            background: linear-gradient(90deg, #ff8800 0%, #ffb347 100%);
+            color: #fff;
+            transform: scale(1.05);
+        }
+        .contact-success {
+            color: #2ecc71;
+            margin-top: 1rem;
+            font-weight: bold;
+            display: none;
+        }
+        /* Dark mode */
+        .dark-mode body { background: #181818; color: #ffd699; }
+        .dark-mode .main-nav { background: #232323; box-shadow: 0 2px 8px #ffb34733; border-bottom: 2px solid #ffb34744;}
+        .dark-mode .nav-logo { color: #ffd699; }
+        .dark-mode .nav-menu a { color: #eee; }
+        .dark-mode .nav-menu a.active,
+        .dark-mode .nav-menu a:hover { color: #ffb347; }
+        .dark-mode .contact-section { background: linear-gradient(120deg, #232323cc 0%, #181818cc 100%), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1500&q=80') center/cover fixed; }
+        .dark-mode .contact-container { background: #232323cc; color: #ffd699; box-shadow: 0 4px 16px #ffb34722; border: 1.5px solid #ffb34733;}
+        .dark-mode .contact-info { color: #ccc; }
+        .dark-mode .contact-form label { color: #ffd699; }
+        .dark-mode .contact-form input,
+        .dark-mode .contact-form textarea { background: #232323; color: #ffd699; border: 1.5px solid #ffb34733;}
+        .dark-mode .contact-form input:focus,
+        .dark-mode .contact-form textarea:focus { border: 1.5px solid #ffb347; }
+        .dark-mode .cta-btn { background: #ffb347; color: #232323; }
+        .dark-mode .cta-btn:hover { background: #ff8800; color: #fff; }
+        .dark-mode .nav-toggle { color: #ffd699; }
     </style>
 </head>
 <body>
     <nav class="main-nav">
-        <div class="nav-logo">FastBite</div>
-        <div class="nav-menu">
+        <div class="nav-logo">
+            <i class="fas fa-utensils" style="margin-right: 0.6rem; color: #ffb347;"></i>
+            FastBite
+        </div>
+        <button class="nav-toggle" id="darkToggle" aria-label="Toggle dark mode" title="Dark Mode">
+            <i class="fa fa-moon"></i>
+        </button>
+        <div class="hamburger" id="hamburger" aria-label="Toggle menu" tabindex="0">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="nav-menu" id="nav-menu">
             <a href="index.html">Beranda</a>
             <a href="services.html">Layanan</a>
             <a href="portfolio.html">Portfolio</a>
@@ -244,212 +243,272 @@
             <a href="blog.html">Blog</a>
         </div>
     </nav>
-    <div class="container">
-        <h1>Kontak Kami</h1>
-        <!-- Contact Form -->
-        <section class="contact-section">
-            <form id="contact-form" autocomplete="off" novalidate>
-                <div class="contact-row">
-                    <label for="contact-name">Nama</label>
-                    <input type="text" id="contact-name" maxlength="40" required>
-                    <div class="form-error" id="error-name"></div>
+    <section class="contact-section">
+        <div class="contact-container">
+            <h2>Hubungi Kami</h2>
+            <div class="contact-info">
+                <div><i class="fa fa-envelope"></i> fastbite@email.com</div>
+                <div><i class="fa fa-phone"></i> +62 812-3456-7890</div>
+                <div><i class="fa fa-map-marker-alt"></i> Jl. Makanan No. 123, Jakarta</div>
+            </div>
+            <!-- Google Maps Embed -->
+            <div style="margin-bottom:1.5rem; border-radius:12px; overflow:hidden;">
+                <iframe
+                    id="gmap"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.282123456789!2d106.816666!3d-6.200000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1c5e0b0b0b1%3A0x123456789abcdef!2sJl.%20Makanan%20No.%20123%2C%20Jakarta!5e0!3m2!1sid!2sid!4v1680000000000!5m2!1sid!2sid"
+                    width="100%" height="180" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    title="Lokasi FastBite"></iframe>
+            </div>
+            <form class="contact-form" id="contactForm" autocomplete="off" novalidate>
+                <label for="name">Nama Anda</label>
+                <input type="text" id="name" name="name" placeholder="Nama Anda" required>
+                <label for="email">Email Anda</label>
+                <input type="email" id="email" name="email" placeholder="Email Anda" required>
+                <div id="emailError" style="color:#e74c3c; font-size:0.95em; margin-bottom:0.7rem; display:none;"></div>
+                <label for="message">Pesan Anda</label>
+                <textarea id="message" name="message" placeholder="Pesan Anda" maxlength="300" required></textarea>
+                <div id="msgError" style="color:#e74c3c; font-size:0.95em; margin-bottom:0.7rem; display:none;"></div>
+                <div style="font-size:0.9em; color:#888; margin-bottom:1rem;">
+                    <span id="msgCount">0</span>/300 karakter
                 </div>
-                <div class="contact-row">
-                    <label for="contact-email">Email</label>
-                    <input type="email" id="contact-email" maxlength="50" required>
-                    <div class="form-error" id="error-email"></div>
-                </div>
-                <div class="contact-row">
-                    <label for="contact-msg">Pesan</label>
-                    <textarea id="contact-msg" rows="4" maxlength="300" required></textarea>
-                    <div class="form-error" id="error-msg"></div>
-                </div>
-                <button type="submit">Kirim Pesan</button>
-                <div class="form-success" id="form-success"></div>
+                <button type="submit" class="cta-btn">Kirim Pesan</button>
+                <div class="contact-success" id="contactSuccess">Pesan Anda berhasil dikirim!</div>
             </form>
-        </section>
-        <!-- Map & Office -->
-        <section class="map-section">
-            <div class="map-title">Lokasi Kantor Kami</div>
-            <div class="map-container">
-                <!-- Google Maps Embed -->
-                <iframe id="gmap" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.262249600102!2d106.816666!3d-6.200000!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3eecb1b1b1b%3A0x1e1e1e1e1e1e!2sMonas!5e0!3m2!1sid!2sid!4v1680000000000!5m2!1sid!2sid" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-            <div class="office-list">
-                <div class="office-marker active" data-lat="-6.200000" data-lng="106.816666">
-                    <i class="fa fa-map-marker-alt"></i> Kantor Pusat (Jakarta)
+            <!-- Live Chat Simulation -->
+            <div id="liveChat" style="margin-top:2rem; text-align:left;">
+                <div style="font-weight:bold; color:#ff8800; margin-bottom:0.5rem;">
+                    <i class="fa fa-comments"></i> Live Chat
                 </div>
-                <div class="office-marker" data-lat="-7.257472" data-lng="112.752088">
-                    <i class="fa fa-map-marker-alt"></i> Cabang Surabaya
-                </div>
-                <div class="office-marker" data-lat="-6.914744" data-lng="107.609810">
-                    <i class="fa fa-map-marker-alt"></i> Cabang Bandung
-                </div>
+                <div id="chatBox" style="background:#f4f4f4; border-radius:10px; padding:1rem; min-height:80px; max-height:150px; overflow-y:auto; font-size:0.97em; margin-bottom:0.5rem;"></div>
+                <form id="chatForm" style="display:flex; gap:0.5rem;">
+                    <input type="text" id="chatInput" placeholder="Tulis pesan..." style="flex:1; border-radius:8px; border:1px solid #ffb34744; padding:0.6rem 1rem;">
+                    <button type="submit" style="border:none; background:#ffb347; color:#fff; border-radius:8px; padding:0.6rem 1.2rem; font-weight:bold; cursor:pointer;">Kirim</button>
+                </form>
             </div>
-        </section>
-        <!-- Live Chat -->
-        <section class="chat-section">
-            <div class="chat-title"><i class="fa fa-comments"></i> Live Chat</div>
-            <div class="chat-box" id="chat-box">
-                <div class="chat-msg bot">Halo! Ada yang bisa kami bantu?</div>
+        </div>
+    </section>
+    <!-- FAQ Accordion -->
+    <section style="max-width:600px; margin:2.5rem auto 2rem auto; background:#fff; border-radius:18px; box-shadow:0 2px 12px #ffb34722; padding:2rem 1.5rem;">
+        <h2 style="color:#ff8800; text-align:center; margin-bottom:1.2rem;">FAQ</h2>
+        <div class="faq-search-wrap">
+            <span class="faq-search-icon"><i class="fa fa-search"></i></span>
+            <input type="text" id="faqSearch" placeholder="Cari pertanyaan..." autocomplete="off">
+        </div>
+        <div id="faqList">
+            <div class="faq-item">
+                <button class="faq-question">Bagaimana cara memesan makanan di FastBite?</button>
+                <div class="faq-answer">Anda dapat memesan melalui website kami pada halaman Beranda atau Layanan.</div>
             </div>
-            <div class="chat-input-row">
-                <input type="text" id="chat-input" placeholder="Tulis pesan..." maxlength="120">
-                <button id="chat-send" type="button">Kirim</button>
+            <div class="faq-item">
+                <button class="faq-question">Apakah FastBite melayani pengiriman di luar Jakarta?</button>
+                <div class="faq-answer">Saat ini kami hanya melayani area Jakarta dan sekitarnya.</div>
             </div>
-        </section>
-        <!-- FAQ -->
-        <section class="faq-section">
-            <div class="faq-title"><i class="fa fa-question-circle"></i> FAQ</div>
-            <input type="text" class="faq-search" id="faq-search" placeholder="Cari pertanyaan...">
-            <ul class="faq-list" id="faq-list">
-                <!-- FAQ diisi dinamis -->
-            </ul>
-        </section>
-    </div>
+            <div class="faq-item">
+                <button class="faq-question">Bagaimana jika saya ingin membatalkan pesanan?</button>
+                <div class="faq-answer">Silakan hubungi kami melalui kontak di atas atau live chat untuk pembatalan pesanan.</div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Metode pembayaran apa saja yang tersedia?</button>
+                <div class="faq-answer">Kami menerima pembayaran melalui transfer bank, e-wallet, dan kartu kredit.</div>
+            </div>
+        </div>
+    </section>
     <script>
-        // --- Contact Form Validation ---
-        function validateEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
-        const nameInput = document.getElementById('contact-name');
-        const emailInput = document.getElementById('contact-email');
-        const msgInput = document.getElementById('contact-msg');
-        const errorName = document.getElementById('error-name');
-        const errorEmail = document.getElementById('error-email');
-        const errorMsg = document.getElementById('error-msg');
-        const formSuccess = document.getElementById('form-success');
-        function validateForm() {
-            let valid = true;
-            errorName.textContent = '';
-            errorEmail.textContent = '';
-            errorMsg.textContent = '';
-            if (!nameInput.value.trim()) {
-                errorName.textContent = 'Nama wajib diisi.';
-                valid = false;
-            }
-            if (!emailInput.value.trim()) {
-                errorEmail.textContent = 'Email wajib diisi.';
-                valid = false;
-            } else if (!validateEmail(emailInput.value.trim())) {
-                errorEmail.textContent = 'Format email tidak valid.';
-                valid = false;
-            }
-            if (!msgInput.value.trim()) {
-                errorMsg.textContent = 'Pesan wajib diisi.';
-                valid = false;
-            } else if (msgInput.value.length > 300) {
-                errorMsg.textContent = 'Pesan maksimal 300 karakter.';
-                valid = false;
-            }
-            return valid;
-        }
-        nameInput.oninput = validateForm;
-        emailInput.oninput = validateForm;
-        msgInput.oninput = validateForm;
-        document.getElementById('contact-form').onsubmit = function(e) {
-            e.preventDefault();
-            if (validateForm()) {
-                formSuccess.textContent = "Pesan berhasil dikirim. Kami akan segera menghubungi Anda!";
-                this.reset();
+        // Dark mode toggle
+        const darkToggle = document.getElementById('darkToggle');
+        function setDarkMode(on) {
+            if(on) {
+                document.documentElement.classList.add('dark-mode');
+                localStorage.setItem('darkMode', '1');
+                darkToggle.innerHTML = '<i class="fa fa-sun"></i>';
+                darkToggle.title = "Light Mode";
             } else {
-                formSuccess.textContent = "";
+                document.documentElement.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', '0');
+                darkToggle.innerHTML = '<i class="fa fa-moon"></i>';
+                darkToggle.title = "Dark Mode";
             }
-        };
+        }
+        // Initial mode
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const saved = localStorage.getItem('darkMode');
+        setDarkMode(saved === null ? prefersDark : saved === '1');
+        darkToggle.onclick = () => setDarkMode(!document.documentElement.classList.contains('dark-mode'));
 
-        // --- Google Maps Interactive Markers ---
-        const officeMarkers = document.querySelectorAll('.office-marker');
-        officeMarkers.forEach(marker => {
-            marker.onclick = function() {
-                officeMarkers.forEach(m => m.classList.remove('active'));
-                marker.classList.add('active');
-                const lat = marker.getAttribute('data-lat');
-                const lng = marker.getAttribute('data-lng');
-                // Ganti lokasi Google Maps embed
-                document.getElementById('gmap').src =
-                    `https://www.google.com/maps?q=${lat},${lng}&hl=id&z=15&output=embed`;
-            };
+        // Hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+        hamburger.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') navMenu.classList.toggle('open');
         });
 
-        // --- Live Chat Simulation ---
-        const chatBox = document.getElementById('chat-box');
-        const chatInput = document.getElementById('chat-input');
-        const chatSend = document.getElementById('chat-send');
-        function appendChat(msg, sender) {
+        // Real-time form validation
+        const emailInput = document.getElementById('email');
+        const emailError = document.getElementById('emailError');
+        const msgInput = document.getElementById('message');
+        const msgError = document.getElementById('msgError');
+        const msgCount = document.getElementById('msgCount');
+
+        emailInput.addEventListener('input', function() {
+            const val = emailInput.value;
+            const valid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val);
+            if (!valid && val.length > 0) {
+                emailError.textContent = "Format email tidak valid.";
+                emailError.style.display = "block";
+            } else {
+                emailError.style.display = "none";
+            }
+        });
+
+        msgInput.addEventListener('input', function() {
+            msgCount.textContent = msgInput.value.length;
+            if (msgInput.value.length > 300) {
+                msgError.textContent = "Pesan maksimal 300 karakter.";
+                msgError.style.display = "block";
+            } else {
+                msgError.style.display = "none";
+            }
+        });
+
+        // Prevent submit if invalid
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            if (emailError.style.display === "block" || msgError.style.display === "block") {
+                e.preventDefault();
+                return;
+            }
+            document.getElementById('contactSuccess').style.display = 'block';
+            setTimeout(() => {
+                document.getElementById('contactSuccess').style.display = 'none';
+                e.target.reset();
+            }, 2500);
+        });
+
+        // Live Chat Simulation
+        const chatBox = document.getElementById('chatBox');
+        const chatForm = document.getElementById('chatForm');
+        const chatInput = document.getElementById('chatInput');
+        const botReplies = [
+            "Halo! Ada yang bisa kami bantu?",
+            "Silakan tulis pertanyaan Anda.",
+            "Terima kasih telah menghubungi FastBite!",
+            "Mohon tunggu, kami akan segera membalas."
+        ];
+        function addChatMsg(msg, from='user') {
             const div = document.createElement('div');
-            div.className = 'chat-msg ' + sender;
-            div.textContent = msg;
+            div.style.margin = "0.3rem 0";
+            div.style.textAlign = from === 'user' ? 'right' : 'left';
+            div.innerHTML = from === 'user'
+                ? `<span style="background:#ffb34722; color:#222; border-radius:8px; padding:0.4rem 0.9rem; display:inline-block;">${msg}</span>`
+                : `<span style="background:#ffb347; color:#fff; border-radius:8px; padding:0.4rem 0.9rem; display:inline-block;">${msg}</span>`;
             chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
-        function botReply(userMsg) {
-            let reply = "Terima kasih atas pesan Anda.";
-            if (/halo|hai|hi/i.test(userMsg)) reply = "Halo juga! Ada yang bisa kami bantu?";
-            else if (/alamat|lokasi/i.test(userMsg)) reply = "Kantor pusat kami di Jakarta, lihat peta di atas.";
-            else if (/promo|diskon/i.test(userMsg)) reply = "Info promo terbaru bisa dilihat di halaman layanan.";
-            else if (/menu|makanan/i.test(userMsg)) reply = "Kami menyediakan berbagai pilihan makanan dari banyak restoran.";
-            setTimeout(() => appendChat(reply, 'bot'), 700);
-        }
-        chatSend.onclick = function() {
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
             const msg = chatInput.value.trim();
             if (!msg) return;
-            appendChat(msg, 'user');
+            addChatMsg(msg, 'user');
             chatInput.value = '';
-            botReply(msg);
-        };
-        chatInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') chatSend.onclick();
+            setTimeout(() => {
+                addChatMsg(botReplies[Math.floor(Math.random()*botReplies.length)], 'bot');
+            }, 900);
         });
 
-        // --- FAQ Accordion & Search ---
-        const faqData = [
-            {
-                q: "Bagaimana cara memesan makanan?",
-                a: "Anda dapat memesan melalui aplikasi atau website kami dengan memilih restoran dan menu yang diinginkan."
-            },
-            {
-                q: "Apakah ada biaya pengantaran?",
-                a: "Ya, biaya pengantaran tergantung pada jarak dan jenis layanan yang dipilih."
-            },
-            {
-                q: "Bagaimana cara menggunakan promo?",
-                a: "Masukkan kode promo saat checkout atau pilih promo yang tersedia di halaman layanan."
-            },
-            {
-                q: "Bagaimana jika makanan tidak sesuai pesanan?",
-                a: "Silakan hubungi layanan pelanggan kami melalui live chat atau kontak yang tersedia."
-            },
-            {
-                q: "Apakah layanan tersedia 24 jam?",
-                a: "Ya, kami melayani pemesanan 24 jam di kota-kota tertentu."
-            }
-        ];
-        function renderFAQ(filter = "") {
-            const list = document.getElementById('faq-list');
-            list.innerHTML = '';
-            faqData.filter(f => f.q.toLowerCase().includes(filter.toLowerCase()))
-                .forEach((f, idx) => {
-                    const li = document.createElement('li');
-                    li.className = 'faq-item';
-                    li.innerHTML = `
-                        <div class="faq-question" tabindex="0">${f.q}</div>
-                        <div class="faq-answer">${f.a}</div>
-                    `;
-                    li.querySelector('.faq-question').onclick = () => {
-                        li.classList.toggle('active');
-                    };
-                    li.querySelector('.faq-question').onkeypress = (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') li.classList.toggle('active');
-                    };
-                    list.appendChild(li);
-                });
-        }
-        document.getElementById('faq-search').oninput = function() {
-            renderFAQ(this.value);
-        };
-        document.addEventListener('DOMContentLoaded', function() {
-            renderFAQ();
+        // FAQ Accordion & Search
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const answer = this.nextElementSibling;
+                answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+                this.classList.toggle('open');
+            });
+        });
+        const faqSearch = document.getElementById('faqSearch');
+        faqSearch.addEventListener('input', function() {
+            const val = this.value.toLowerCase();
+            document.querySelectorAll('#faqList .faq-item').forEach(item => {
+                const q = item.querySelector('.faq-question').textContent.toLowerCase();
+                const a = item.querySelector('.faq-answer').textContent.toLowerCase();
+                item.style.display = (q.includes(val) || a.includes(val)) ? '' : 'none';
+            });
+        });
+
+        // Interactive marker (simulate click on map)
+        document.getElementById('gmap').addEventListener('load', function() {
+            // Simulasi: tampilkan alert jika iframe diklik (tidak bisa marker asli tanpa API)
+            this.contentWindow.document.body.onclick = function() {
+                alert('Lokasi kantor FastBite di Jl. Makanan No. 123, Jakarta');
+            };
         });
     </script>
+    <style>
+    /* FAQ Accordion Styles */
+    .faq-item { border-bottom:1px solid #ffb34722; }
+    .faq-question {
+        background:none; border:none; width:100%; text-align:left; font-size:1.08em;
+        font-weight:bold; color:#ff8800; padding:0.7rem 0; cursor:pointer; outline:none;
+        transition:color 0.2s;
+    }
+    .faq-question.open { color:#222; }
+    .faq-answer { display:none; padding:0.5rem 0 1rem 0.5rem; color:#555; font-size:0.98em; }
+
+    .faq-search-wrap {
+        position: relative;
+        width: 100%;
+        margin-bottom: 1.2rem;
+        display: flex;
+        align-items: center;
+    }
+    .faq-search-icon {
+        position: absolute;
+        left: 1.1rem;
+        color: #ffb347;
+        font-size: 1.1em;
+        pointer-events: none;
+        z-index: 2;
+    }
+    #faqSearch {
+        width: 100%;
+        padding: 0.7rem 1rem 0.7rem 2.5rem;
+        border-radius: 10px;
+        border: 1.5px solid #ffb34744;
+        font-size: 1em;
+        background: #faf9f7;
+        color: #222;
+        outline: none;
+        transition: border 0.2s, box-shadow 0.2s;
+        box-shadow: 0 1px 4px #ffb34711;
+        text-align: left;
+    }
+    #faqSearch:focus {
+        border: 1.5px solid #ffb347;
+        background: #fff;
+        box-shadow: 0 2px 8px #ffb34722;
+    }
+    #faqSearch::placeholder {
+        color: #b8b8b8;
+        opacity: 1;
+        font-style: italic;
+    }
+    .dark-mode #faqSearch {
+        background: #232323;
+        color: #ffd699;
+        border: 1.5px solid #ffb34733;
+    }
+    .dark-mode #faqSearch:focus {
+        background: #181818;
+        border: 1.5px solid #ffb347;
+    }
+    .dark-mode #faqSearch::placeholder {
+        color: #ffd69999;
+    }
+    @media (max-width: 600px) {
+        .faq-search-wrap { margin-bottom: 1rem; }
+        #faqSearch { font-size: 0.98em; }
+    }
+    </style>
 </body>
 </html>
