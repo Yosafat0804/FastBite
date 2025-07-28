@@ -169,17 +169,35 @@
             color: #fff;
             border: none;
             padding: 1.1rem 2.5rem;
-            font-size: 1.25rem;
+            font-size: 1.45rem;
             border-radius: 40px;
             cursor: pointer;
             font-weight: bold;
             box-shadow: 0 4px 16px #ffb34744;
-            transition: background 0.3s, transform 0.2s;
+            transition: background 0.3s, color 0.3s, transform 0.2s;
+            margin-bottom: 1.1rem;
         }
         .cta-btn:hover {
             background: linear-gradient(90deg, #ff8800 0%, #ffb347 100%);
             color: #fff;
             transform: scale(1.05);
+        }
+        .cta-btn.cta-menu {
+            background: #fff;
+            color: #ff8800;
+            font-size: 1.45rem;
+            font-weight: bold;
+            border-radius: 40px;
+            box-shadow: 0 4px 16px #ffb34744;
+            margin-left: 0;
+            margin-bottom: 0;
+            margin-top: -0.5rem;
+            border: none;
+            transition: background 0.3s, color 0.3s;
+        }
+        .cta-btn.cta-menu:hover {
+            background: #ffb347;
+            color: #232323;
         }
         /* Features */
         .features { display: flex; justify-content: center; gap: 2rem; margin: 4rem 0; flex-wrap: wrap;}
@@ -221,6 +239,7 @@
             background: #fff;
             padding: 3rem 0;
             text-align: center;
+            margin-top: 3rem; /* Tambahkan ini untuk memberi jarak dari atas */
         }
         .carousel {
             position: relative;
@@ -310,6 +329,145 @@
         .dark-mode .footer-dark .footer-copyright {
             color: #ffd69999 !important;
         }
+        #menu-favorit {
+            max-width: 1100px;
+            margin: 3rem auto 0 auto;
+            background: linear-gradient(135deg, #23221b 80%, #181818 100%);
+            border-radius: 28px;
+            box-shadow: 0 2px 32px #ffb34733, 0 0 0 2px #ffb34711;
+            padding: 2.5rem 1rem;
+        }
+        #menu-favorit h2 {
+            text-align: center;
+            color: #ffb347 !important;
+            margin-bottom: 2rem;
+            font-size: 2.7rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        #menu-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(320px,1fr));
+            gap: 2rem;
+        }
+        .menu-card {
+            background: #23221b;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px #ffb34733, 0 0 0 2px #ffb34711;
+            padding: 2rem 1.2rem 1.2rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 220px;
+            position: relative;
+            transition: transform 0.22s, box-shadow 0.22s, background 0.3s;
+        }
+        .menu-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 32px #ffb34733, 0 2px 12px #ffb34744;
+            background: #181818;
+        }
+        .menu-img {
+            width: 110px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 2px 16px #ffb34733, 0 0 0 8px #181818;
+            background: #181818;
+        }
+        .menu-title {
+            font-size: 1.35rem;
+            font-weight: bold;
+            color: #ffd699;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.5px;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .menu-harga {
+            color: #ffd699;
+            font-weight: bold;
+            font-size: 1.15rem;
+            margin-bottom: 0.2rem;
+        }
+        .menu-desc {
+            color: #ffd699cc;
+            font-size: 1.05rem;
+            margin-top: 0.2rem;
+            opacity: 0.93;
+            text-align: center;
+        }
+        .menu-card button {
+            margin-top: 1.2rem;
+            background: linear-gradient(90deg,#ffb347,#ff8800);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 0.6rem 2.2rem;
+            font-weight: bold;
+            font-family: 'Montserrat',sans-serif;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 8px #ffb34722;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+        .menu-card button:hover {
+            background: linear-gradient(90deg,#ff8800,#ffb347);
+            color: #fffbe8;
+            box-shadow: 0 4px 16px #ffb34744;
+        }
+        #popup-pesan {
+            display:none;
+            position:fixed;
+            top:0;
+            left:0;
+            width:100vw;
+            height:100vh;
+            background:rgba(0,0,0,0.65); /* lebih gelap */
+            z-index:1000;
+            align-items:center;
+            justify-content:center;
+        }
+        #form-pesan {
+            background: #23221b !important; /* gelap */
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            max-width: 350px;
+            width: 90%;
+            box-shadow: 0 8px 32px #ffb34733;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            position: relative;
+        }
+        #form-pesan h3,
+        #form-pesan label {
+            color: #ffd699 !important;
+            font-weight: bold;
+        }
+        #form-pesan input,
+        #form-pesan textarea {
+            background: #181818 !important;
+            color: #ffd699 !important;
+            border: 1px solid #ffb34755;
+        }
+        #form-pesan button[type="submit"] {
+            background: linear-gradient(90deg,#ffb347,#ff8800);
+            color: #fff;
+            font-weight: bold;
+        }
+        #form-pesan button[type="button"] {
+            color: #ffb347 !important;
+        }
+        #pesan-success {
+            color: #6fff6f !important;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+        /* ...existing code... */
     </style>
 </head>
 <body>
@@ -346,6 +504,9 @@
         <button class="cta-btn" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
             Lihat Layanan Kami
         </button>
+        <button class="cta-btn" style="margin-left:1rem;" onclick="document.getElementById('menu-favorit').scrollIntoView({behavior:'smooth'})">
+            Lihat Menu
+        </button>
     </section>
 
     <!-- Features Section -->
@@ -367,6 +528,14 @@
         </div>
     </section>
 
+    <!-- Menu Favorit Section -->
+    <section id="menu-favorit">
+        <h2>Menu Favorit</h2>
+        <div id="menu-list">
+            <!-- Menu akan diisi oleh JS -->
+        </div>
+    </section>
+
     <!-- Testimonials Section -->
     <section class="testimonials" id="testimonials">
         <h2>Apa Kata Mereka?</h2>
@@ -375,6 +544,22 @@
         </div>
         <div class="carousel-controls" id="carousel-dots"></div>
     </section>
+
+    <!-- Popup Pesan -->
+    <div id="popup-pesan" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.65);z-index:1000;align-items:center;justify-content:center;">
+        <form id="form-pesan" style="background:#23221b;padding:2rem 1.5rem;border-radius:16px;max-width:350px;width:90%;box-shadow:0 8px 32px #ffb34733;display:flex;flex-direction:column;gap:1rem;position:relative;">
+            <button type="button" onclick="closePesan()" style="position:absolute;top:10px;right:14px;background:none;border:none;font-size:1.3rem;color:#ff8800;cursor:pointer;">&times;</button>
+            <h3 id="pesan-nama" style="margin-bottom:0.5rem;color:#ffd699;font-weight:bold;"></h3>
+            <label style="color:#ffd699;font-weight:bold;">Nama Anda:
+                <input type="text" id="nama-pemesan" required style="width:100%;padding:0.5rem;border-radius:8px;border:1px solid #ffb34733;background:#fff;">
+            </label>
+            <label style="color:#ffd699;font-weight:bold;">Jumlah:
+                <input type="number" id="jumlah-pesan" min="1" value="1" required style="width:100%;padding:0.5rem;border-radius:8px;border:1px solid #ffb34733;background:#fff;">
+            </label>
+            <button type="submit" style="background:linear-gradient(90deg,#ffb347,#ff8800);color:#fff;border:none;border-radius:8px;padding:0.7rem 1.2rem;font-weight:bold;cursor:pointer;">Pesan Sekarang</button>
+            <div id="pesan-success" style="color:green;font-weight:bold;text-align:center;display:none;"></div>
+        </form>
+    </div>
 
     <script>
         // Dark mode toggle
@@ -538,6 +723,66 @@
             document.getElementById('testimonial-carousel').addEventListener('mouseenter', () => clearInterval(testimonialInterval));
             document.getElementById('testimonial-carousel').addEventListener('mouseleave', autoSlideTestimonials);
         });
+
+        // MENU FAVORIT DATA
+        const menuFavorit = [
+            {
+                nama: "Nasi Goreng Spesial",
+                harga: 25000,
+                deskripsi: "Nasi goreng dengan topping ayam, telur, dan kerupuk.",
+                img: "https://upload.wikimedia.org/wikipedia/commons/3/3e/Nasi_goreng_indonesia.jpg"
+            },
+            {
+                nama: "Ayam Geprek Sambal",
+                harga: 22000,
+                deskripsi: "Ayam goreng tepung dengan sambal pedas khas.",
+                img: "https://upload.wikimedia.org/wikipedia/commons/2/24/Ayam_geprek.png"
+            },
+            {
+                nama: "Mie Ayam Bakso",
+                harga: 18000,
+                deskripsi: "Mie ayam gurih dengan bakso sapi dan sayur segar.",
+                img: "https://www.nikieco602.com/wp-content/uploads/2015/02/Mie-Ayam-Bakso.jpg"
+            },
+        ];
+
+        // Render Menu Favorit
+        function renderMenuFavorit() {
+            const list = document.getElementById('menu-list');
+            list.innerHTML = '';
+            menuFavorit.forEach((m, idx) => {
+                const el = document.createElement('div');
+                el.className = "menu-card";
+                el.innerHTML = `
+                    <img src="${m.img}" alt="${m.nama}" class="menu-img">
+                    <div class="menu-title">${m.nama}</div>
+                    <div class="menu-harga">Rp ${m.harga.toLocaleString()}</div>
+                    <div class="menu-desc">${m.deskripsi}</div>
+                    <button onclick="openPesan(${idx})">Pesan</button>
+                `;
+                list.appendChild(el);
+            });
+        }
+        document.addEventListener("DOMContentLoaded", renderMenuFavorit);
+
+        // Popup Pesan
+        let menuIdx = null;
+        function openPesan(idx) {
+            menuIdx = idx;
+            document.getElementById('pesan-nama').textContent = "Pesan: " + menuFavorit[idx].nama;
+            document.getElementById('popup-pesan').style.display = "flex";
+            document.getElementById('pesan-success').style.display = "none";
+            document.getElementById('form-pesan').reset();
+        }
+        function closePesan() {
+            document.getElementById('popup-pesan').style.display = "none";
+        }
+        document.getElementById('form-pesan').onsubmit = function(e) {
+            e.preventDefault();
+            document.getElementById('pesan-success').textContent = "Pesanan berhasil dikirim!";
+            document.getElementById('pesan-success').style.display = "block";
+            setTimeout(closePesan, 1500);
+        };
     </script>
     <footer class="footer-dark" style="padding:2.5rem 0 2rem 0; text-align:center; margin-top:3rem;">
         <div class="footer-desc" style="max-width:600px;margin:0 auto 1.2rem auto;font-size:1.05rem;line-height:1.6;">
