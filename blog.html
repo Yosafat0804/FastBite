@@ -418,6 +418,39 @@
             color: #222;
             font-size: 1.08rem;
         }
+        /* Footer Styles */
+        .footer-dark {
+            background: #232323;
+            color: #ffd699;
+            border-top: 2px solid #ffb34744;
+            box-shadow: 0 -2px 8px #ffb34722;
+        }
+        .footer-dark a {
+            color: #ffb347 !important;
+        }
+        .footer-dark .footer-contact i {
+            color: #ffb347 !important;
+        }
+        .footer-dark .footer-contact a {
+            color: #ffb347 !important;
+        }
+        .footer-dark .footer-desc {
+            color: #ffd699 !important;
+        }
+        .footer-dark .footer-copyright {
+            color: #ffd69999 !important;
+        }
+        .dark-mode .footer-dark {
+            background: #181818;
+            color: #ffd699;
+            border-top: 2px solid #ffb34744;
+        }
+        .dark-mode .footer-dark .footer-desc {
+            color: #ffd699 !important;
+        }
+        .dark-mode .footer-dark .footer-copyright {
+            color: #ffd69999 !important;
+        }
     </style>
 </head>
 <body>
@@ -472,6 +505,21 @@
         <div id="modalDesc" style="color:#222;font-size:1.08rem;"></div>
       </div>
     </div>
+    <footer class="footer-dark" style="padding:2.5rem 0 2rem 0; text-align:center; margin-top:3rem;">
+        <div class="footer-desc" style="max-width:600px;margin:0 auto 1.2rem auto;font-size:1.05rem;line-height:1.6;">
+            FastBite adalah platform pemesanan makanan online yang menghubungkan Anda dengan restoran favorit dan kurir profesional. Nikmati layanan cepat, pilihan restoran luas, dan pemesanan mudah langsung dari aplikasi atau website kami.
+        </div>
+        <div class="footer-contact" style="margin-bottom:1.2rem;">
+            <i class="fa fa-envelope" style="margin-right:0.5rem;"></i>
+            <a href="mailto:info@fastbite.com" style="text-decoration:none;">info@fastbite.com</a>
+            &nbsp; | &nbsp;
+            <i class="fa fa-phone" style="margin-right:0.5rem;"></i>
+            <a href="tel:+628123456789" style="text-decoration:none;">+62 812-3456-789</a>
+        </div>
+        <div class="footer-copyright" style="margin-top:0.5rem;font-size:0.98rem;">
+            &copy; 2025 FastBite. All rights reserved.
+        </div>
+    </footer>
     <script>
         // Dark mode toggle
         const darkToggle = document.getElementById('darkToggle');

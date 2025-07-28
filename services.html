@@ -109,9 +109,9 @@
         }
         .services-hero {
             position: relative;
-            height: 45vh;
-            background: linear-gradient(120deg, #ffb347cc 0%, #ff8800cc 100%), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1500&q=80') center/cover fixed;
-            color: #fff;
+            height: 55vh;
+            min-height: 340px;
+            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat fixed;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -123,16 +123,36 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(6px);
+            background: rgba(24,24,24,0.72);
+            backdrop-filter: blur(4px);
             z-index: 1;
         }
         .services-hero > * {
             position: relative;
             z-index: 2;
         }
-        .services-hero h1 { font-size: 2.7rem; margin-bottom: 0.7rem; }
-        .services-hero p { font-size: 1.2rem; color: #fff; opacity: 0.95;}
+        .services-hero h1 {
+            color: #fff;
+            font-size: 3.2rem;
+            font-weight: bold;
+            margin-bottom: 1.2rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 16px #000a;
+        }
+        .services-hero p {
+            color: #fff;
+            font-size: 1.45rem;
+            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto;
+            text-shadow: 0 2px 8px #0008;
+            line-height: 1.4;
+        }
+        /* Responsive */
+        @media (max-width: 700px) {
+            .services-hero h1 { font-size: 2.1rem; }
+            .services-hero p { font-size: 1.05rem; }
+        }
         /* Services Cards */
         .services-list { display: flex; justify-content: center; gap: 2rem; margin: 4rem 0; flex-wrap: wrap;}
         .service-card {
@@ -292,6 +312,38 @@ section[style*="background:#fff"] button:hover {
 .dark-mode .catalog-icon {
     color: #ffd699 !important;
 }
+.footer-dark {
+    background: #232323;
+    color: #ffd699;
+    border-top: 2px solid #ffb34744;
+    box-shadow: 0 -2px 8px #ffb34722;
+}
+.footer-dark a {
+    color: #ffb347 !important;
+}
+.footer-dark .footer-contact i {
+    color: #ffb347 !important;
+}
+.footer-dark .footer-contact a {
+    color: #ffb347 !important;
+}
+.footer-dark .footer-desc {
+    color: #ffd699 !important;
+}
+.footer-dark .footer-copyright {
+    color: #ffd69999 !important;
+}
+.dark-mode .footer-dark {
+    background: #181818;
+    color: #ffd699;
+    border-top: 2px solid #ffb34744;
+}
+.dark-mode .footer-dark .footer-desc {
+    color: #ffd699 !important;
+}
+.dark-mode .footer-dark .footer-copyright {
+    color: #ffd69999 !important;
+}
     </style>
 </head>
 <body>
@@ -320,7 +372,7 @@ section[style*="background:#fff"] button:hover {
     <!-- Hero Section -->
     <section class="services-hero">
         <h1>Layanan FastBite</h1>
-        <p>Kami hadir untuk memenuhi kebutuhan Anda dengan layanan terbaik, tercepat, dan terpercaya.</p>
+        <p>Kami hadir untuk memenuhi kebutuhan Anda akan layanan pesan antar makanan yang cepat dan terpercaya</p>
     </section>
     <!-- Services Section -->
     <section class="services-list" id="services">
@@ -450,6 +502,22 @@ section[style*="background:#fff"] button:hover {
         </form>
         <div id="customMsg" style="margin-top:1rem;color:green;font-weight:bold;"></div>
     </section>
+
+    <footer class="footer-dark" style="padding:2.5rem 0 2rem 0; text-align:center; margin-top:3rem;">
+    <div class="footer-desc" style="max-width:600px;margin:0 auto 1.2rem auto;font-size:1.05rem;line-height:1.6;">
+        FastBite adalah platform pemesanan makanan online yang menghubungkan Anda dengan restoran favorit dan kurir profesional. Nikmati layanan cepat, pilihan restoran luas, dan pemesanan mudah langsung dari aplikasi atau website kami.
+    </div>
+    <div class="footer-contact" style="margin-bottom:1.2rem;">
+        <i class="fa fa-envelope" style="margin-right:0.5rem;"></i>
+        <a href="mailto:info@fastbite.com" style="text-decoration:none;">info@fastbite.com</a>
+        &nbsp; | &nbsp;
+        <i class="fa fa-phone" style="margin-right:0.5rem;"></i>
+        <a href="tel:+628123456789" style="text-decoration:none;">+62 812-3456-789</a>
+    </div>
+    <div class="footer-copyright" style="margin-top:0.5rem;font-size:0.98rem;">
+        &copy; 2025 FastBite. All rights reserved.
+    </div>
+</footer>
 
     <script>
         // Dark mode toggle
